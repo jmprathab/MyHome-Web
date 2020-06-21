@@ -1,16 +1,31 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import SignIn from "./components/sign-in/sign-in.component";
-import SignUp from "./components/sign-up/sign-up.component";
-import "./sign-in-and-sign-up.styles.scss";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import "./pages/sign-in-and-sign-up/sign-in-and-sign-up.styles.scss";
 
-function App() {
-    return (
-        <div className="sign-in-and-sign-up">
-            <SignIn />
-            <SignUp />
-        </div>
-    );
+class App extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            currentUser: null,
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <Switch>
+                    <Route
+                        exact
+                        path="/signin"
+                        component={SignInAndSignUpPage}
+                    />
+                </Switch>
+            </div>
+        );
+    }
 }
 
 export default App;

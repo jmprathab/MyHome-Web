@@ -2,6 +2,7 @@ import React from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+import CreateUserApi from "../../api/CreateUser";
 
 import "./sign-up.styles.scss";
 
@@ -10,12 +11,50 @@ class SignUp extends React.Component {
         super();
 
         this.state = {
-            displayName: "",
+            name: "",
             email: "",
             password: "",
             confirmPassword: "",
         };
     }
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const { name, email, password, confirmPassword } = this.state;
+
+        if (password !== confirmPassword) {
+            alert("passwords don't match");
+            return;
+        }
+
+        try {
+            this.createUser(name, email, password);
+            this.setState({
+                name: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    createUser = (name, email, password) => {
+        let api = new CreateUserApi(name, email, password);
+        let responsePromise = api.createUser();
+        responsePromise
+            .then((res) => {
+                if (!res.ok) {
+                    alert("Cannot create account");
+                } else {
+                    alert("Successfully created account");
+                }
+                return res.json();
+            })
+            .then((res) => console.log(res));
+    };
 
     handleChange = (event) => {
         const { name, value } = event.target;
@@ -24,7 +63,7 @@ class SignUp extends React.Component {
     };
 
     render() {
-        const { displayName, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword } = this.state;
         return (
             <div className="sign-up">
                 <h2 className="title">I do not have a account</h2>
@@ -32,10 +71,10 @@ class SignUp extends React.Component {
                 <form className="sign-up-form" onSubmit={this.handleSubmit}>
                     <FormInput
                         type="text"
-                        name="displayName"
-                        value={displayName}
+                        name="name"
+                        value={name}
                         onChange={this.handleChange}
-                        label="Display Name"
+                        label="Name"
                         required
                     />
                     <FormInput

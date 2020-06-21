@@ -2,6 +2,7 @@ import React from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+import LoginUserApi from "../../api/LoginUser";
 
 import "./sign-in.styles.scss";
 
@@ -17,8 +18,38 @@ class SignIn extends React.Component {
 
     handleChange = (event) => {
         const { value, name } = event.target;
-
         this.setState({ [name]: value });
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const { email, password } = this.state;
+
+        try {
+            this.loginUser(email, password);
+            this.setState({
+                email: "",
+                password: "",
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    loginUser = (email, password) => {
+        let api = new LoginUserApi(email, password);
+        let responsePromise = api.createUser();
+        responsePromise
+            .then((res) => {
+                if (!res.ok) {
+                    alert("Cannot login");
+                } else {
+                    alert("Successfully logged in");
+                }
+                return res.json();
+            })
+            .then((res) => console.log(res));
     };
 
     render() {
