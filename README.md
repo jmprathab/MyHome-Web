@@ -12,7 +12,7 @@ A Web application which helps people manage their apartment.
 ## Prerequisites
 
 * npm
-* You will need backend for this application. Backend is ![here](https://github.com/jmprathab/MyHome)
+* You will need backend for this application. Backend is [here](https://github.com/jmprathab/MyHome)
 
 ## Installing
 
