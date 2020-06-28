@@ -5,14 +5,17 @@ import CustomButton from "../custom-button/custom-button.component";
 import LoginUserApi from "../../api/LoginUser";
 
 import "./sign-in.styles.scss";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
+    // TODO Remove this after development.
     this.state = {
-      email: "",
-      password: "",
+      email: "test@test.com",
+      password: "testtest",
     };
   }
 
@@ -21,13 +24,13 @@ class SignIn extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async (event, setCurrentUser) => {
     event.preventDefault();
 
     const { email, password } = this.state;
 
     try {
-      this.loginUser(email, password);
+      this.loginUser(email, password, setCurrentUser);
       this.setState({
         email: "",
         password: "",
@@ -37,19 +40,40 @@ class SignIn extends React.Component {
     }
   };
 
-  loginUser = (email, password) => {
+  updateUserState = (userToken, userId, setCurrentUser) => {
+    // Persist user details to localStorage
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        userId: userId,
+        token: userToken,
+      })
+    );
+
+    setCurrentUser({
+      userId: userId,
+      token: userToken,
+    });
+  };
+
+  loginUser = (email, password, setCurrentUser) => {
     let api = new LoginUserApi(email, password);
-    let responsePromise = api.createUser();
+    let responsePromise = api.loginUser();
+
     responsePromise
       .then((res) => {
-        if (!res.ok) {
-          alert("Cannot login");
-        } else {
-          alert("Successfully logged in");
-        }
-        return res.json();
+        return {
+          userId: res.headers.userid,
+          userToken: res.headers.token,
+        };
       })
-      .then((res) => console.log(res));
+      .then(({ userId, userToken }) => {
+        console.log(userId);
+        console.log(userToken);
+        this.updateUserState(userToken, userId, setCurrentUser);
+      });
+
+    // Now dispatch an action to update the state
   };
 
   render() {
@@ -58,7 +82,7 @@ class SignIn extends React.Component {
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={(e) => this.handleSubmit(e, this.props.setCurrentUser)}>
           <FormInput
             name="email"
             type="email"
@@ -84,4 +108,12 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
