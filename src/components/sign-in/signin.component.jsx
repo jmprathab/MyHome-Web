@@ -8,8 +8,8 @@ class SignIn extends React.Component {
     super(props);
 
     this.state = {
-      email: "test@test.com",
-      password: "testtest",
+      email: "",
+      password: "",
     };
   }
 
