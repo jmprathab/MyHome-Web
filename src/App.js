@@ -9,7 +9,7 @@ import "./App.css";
 
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import HomePage from "./pages/homepage/homepage.component";
-import NavigationBar from "./components/navigationbar/navigationbar.component";
+import NavigationBar from "./components/navigation-bar/navigation-bar.component";
 
 import { setCurrentUser } from "./redux/user/user.actions";
 
