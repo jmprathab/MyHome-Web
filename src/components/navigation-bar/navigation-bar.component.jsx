@@ -1,8 +1,7 @@
 import React from "react";
-import Nav from "react-bootstrap/Nav";
-import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 import { setCurrentUser } from "../../redux/user/user.actions";
 
@@ -13,43 +12,24 @@ const doSignOut = (setCurrentUser) => {
 
 const NavigationBar = ({ currentUser, setCurrentUser }) => {
   return (
-    <Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
-        MyHome
-      </a>
-      <Button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-      >
-        <span className=" navbar-toggler-icon"></span>
-      </Button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">
-              Home <span className="sr-only"></span>
-            </a>
-          </li>
-          <li className="nav-item active">
-            {currentUser ? (
-              <Link
-                to="/"
-                className="nav-link"
-                onClick={(e) => doSignOut(setCurrentUser)}
-              >
-                Logout<span className="sr-only"></span>
-              </Link>
-            ) : (
-              <Link className="nav-link" to="/signin">
-                Login<span className="sr-only"></span>
-              </Link>
-            )}
-          </li>
-        </ul>
-      </div>
-    </Nav>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand href="/">MyHome</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          {currentUser ? (
+            <Nav.Link to="/signin" onClick={(e) => doSignOut(setCurrentUser)}>
+              Logout
+            </Nav.Link>
+          ) : (
+            <Nav.Link to="/signin" href="/signin">
+              Login
+            </Nav.Link>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
