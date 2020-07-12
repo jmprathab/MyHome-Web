@@ -63,10 +63,11 @@ class BootstrapSignUp extends React.Component {
       <div>
         <h3>I do not have an account</h3>
         <h6>Sign up with your email and password</h6>
-        <form>
+        <form onSubmit={(e) => this.handleSubmit(e, this.props.setCurrentUser)}>
           <div className="form-group">
             <label htmlFor="createAccountInputName">Name</label>
             <input
+              name="name"
               type="name"
               className="form-control"
               id="createAccountInputName"
@@ -77,6 +78,7 @@ class BootstrapSignUp extends React.Component {
           <div className="form-group">
             <label htmlFor="createAccountInputEmail">Email address</label>
             <input
+              name="email"
               type="email"
               className="form-control"
               id="createAccountInputEmail"
@@ -87,6 +89,7 @@ class BootstrapSignUp extends React.Component {
           <div className="form-group">
             <label htmlFor="createAccountInputPassword">Password</label>
             <input
+              name="password"
               type="password"
               value={password}
               onChange={this.handleChange}
@@ -99,6 +102,7 @@ class BootstrapSignUp extends React.Component {
               Confirm Password
             </label>
             <input
+              name="confirmPassword"
               type="password"
               className="form-control"
               id="createAccountInputConfirmPassword"

@@ -80,6 +80,7 @@ class SignIn extends React.Component {
             <label htmlFor="inputEmail">Email address</label>
             <input
               type="email"
+              name="email"
               className="form-control"
               id="inputEmail"
               onChange={this.handleChange}
@@ -89,6 +90,7 @@ class SignIn extends React.Component {
           <div className="form-group">
             <label htmlFor="inputPassword">Password</label>
             <input
+              name="password"
               type="password"
               className="form-control"
               id="inputPassword"
