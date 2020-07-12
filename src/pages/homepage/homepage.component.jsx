@@ -1,10 +1,11 @@
 import React from "react";
-
-import "./homepage.styles.scss";
+import HeroText from "../../components/hero-text/hero-text.component";
+import CommunityList from "../../components/community-list/community-list.component";
 
 const HomePage = () => (
-  <div className="homepage">
-    <h2>Welcome to MyHome Web Application</h2>
+  <div>
+    <HeroText />
+    <CommunityList />
   </div>
 );
 

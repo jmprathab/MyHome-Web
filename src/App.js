@@ -1,12 +1,16 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import "./App.css";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import "./pages/sign-in-and-sign-up/sign-in-and-sign-up.styles.scss";
-import HomePage from "./pages/homepage/homepage.component";
-
-import Header from "./components/header/header.component";
 import { connect } from "react-redux";
+
+// Importing the Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./App.css";
+
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import HomePage from "./pages/homepage/homepage.component";
+import NavigationBar from "./components/navigationbar/navigationbar.component";
+
 import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends React.Component {
@@ -33,11 +37,13 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <Header />
+          <NavigationBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/signin" component={SignInAndSignUpPage} />
           </Switch>
+
+          {/* <CommunityList /> */}
         </div>
       </div>
     );

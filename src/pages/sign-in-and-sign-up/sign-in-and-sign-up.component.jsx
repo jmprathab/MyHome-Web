@@ -1,14 +1,21 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
 
-import SignIn from "../../components/sign-in/sign-in.component";
-import SignUp from "../../components/sign-up/sign-up.component";
-
-import "./sign-in-and-sign-up.styles.scss";
+import SignIn from "../../components/sign-in/signin.component";
+import SignUp from "../../components/sign-up/signup.component";
 
 const SignInAndSignUpPage = () => (
-  <div className="sign-in-and-sign-up">
-    <SignIn />
-    <SignUp />
+  <div>
+    <Container>
+      <div className="row mt-5">
+        <div className="col-md-6">
+          <SignIn />
+        </div>
+        <div className="col-md-6">
+          <SignUp />
+        </div>
+      </div>
+    </Container>
   </div>
 );
 

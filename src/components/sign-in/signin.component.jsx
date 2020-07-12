@@ -1,10 +1,5 @@
 import React from "react";
-
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
 import LoginUserApi from "../../api/LoginUser";
-
-import "./sign-in.styles.scss";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
 
@@ -12,7 +7,6 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
-    // TODO Remove this after development.
     this.state = {
       email: "test@test.com",
       password: "testtest",
@@ -78,29 +72,34 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
-
+      <div>
+        <h3>I already have an account</h3>
+        <h6>Sign in with your email and password</h6>
         <form onSubmit={(e) => this.handleSubmit(e, this.props.setCurrentUser)}>
-          <FormInput
-            name="email"
-            type="email"
-            handleChange={this.handleChange}
-            value={this.state.email}
-            label="Email"
-            required
-          />
-          <FormInput
-            name="password"
-            type="password"
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label="Password"
-            required
-          />
-          <div className="buttons">
-            <CustomButton type="submit"> Sign in </CustomButton>
+          <div className="form-group">
+            <label htmlFor="inputEmail">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="inputEmail"
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputPassword">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="inputPassword"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">
+              Sign In
+            </button>
           </div>
         </form>
       </div>
