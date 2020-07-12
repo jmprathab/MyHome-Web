@@ -6,7 +6,9 @@ A Web application which helps people manage their apartment.
 
 ## Screenshots
 
-![SignIn and SignUp page](./screens/Sign-in-and-sign-up.png)
+![Web Login and SignUp page](./screens/WebLoginAndSignUp.png)
+![Web Homepage](./screens/WebHomepage.png)
+![Mobile Homepage](./screens/MobileHomepage.png)
 
 ## Prerequisites
 
