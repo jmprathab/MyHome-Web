@@ -3,7 +3,8 @@
 A React+Bootstrap Web application which helps people manage their apartment. Spring boot based backend for the application is [here](https://github.com/jmprathab/MyHome).
 
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![Join us at Discord](https://img.shields.io/discord/731769161361129523)
+![Join us at Discord](https://img.shields.io/discord/731769161361129523?label=discord)
+![Good First Issues](https://img.shields.io/github/issues-raw/jmprathab/MyHome/good%20first%20issue?label=beginner%20friendly%20issues)
 
 ## Screenshots
 
