@@ -4,7 +4,7 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/731769161361129523?label=discord)](https://discord.gg/CngACKh)
-[![Good First Issue](https://img.shields.io/github/issues-raw/jmprathab/MyHome/good%20first%20issue?label=beginner%20friendly%20issues)](https://github.com/jmprathab/MyHome-Web/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+label%3Aup-for-grabs)
+[![Good First Issue](https://img.shields.io/github/issues-raw/jmprathab/MyHome-Web/good%20first%20issue?label=beginner%20friendly%20issues)](https://github.com/jmprathab/MyHome-Web/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+label%3Aup-for-grabs)
 
 ## Screenshots
 
