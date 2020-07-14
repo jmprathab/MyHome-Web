@@ -28,7 +28,7 @@ class HousesCard extends Component {
           <h4>Houses</h4>
         </div>
         <ul className="list-group list-group-flush bg-dark">
-          {this.state.houses ? this.state.houses.map((house) => <li key={house.houseId} className="list-group-item bg-dark"><a href={`/community/${this.props.uuid}/house/${house.houseId}`}>{house.name}</a></li> ) : ''}
+          {this.state.houses ? this.state.houses.map((house) => <li key={house.houseId} className="list-group-item bg-dark"><a href={`/house/${this.props.uuid}`}>{house.name}</a></li> ) : ''}
         </ul>
       </div>
     )
