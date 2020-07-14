@@ -1,6 +1,7 @@
 # MyHome-Web Application
 
-A React+Bootstrap Web application which helps people manage their apartment. Spring boot based backend for the application is [here](https://github.com/jmprathab/MyHome)
+A React+Bootstrap Web application which helps people manage their apartment. Spring boot based backend for the application is [here](https://github.com/jmprathab/MyHome).
+Join us at Discord [here](https://discord.gg/CngACKh)
 
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
@@ -21,9 +22,10 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 2. Run `npm install`
 3. Run `npm start`
 
-## Authors
+## Contributors
 
 - [Prathab Murugan](https://github.com/jmprathab)
+- [Tobi](https://github.com/Tobi406)
 
 ## License
 
