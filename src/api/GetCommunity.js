@@ -9,9 +9,8 @@ export default class GetHousesApi {
     console.debug(
       `Get details of a community api called with communityId[${this.communityId}], token[${this.token}]`
     );
-    return axiosInstance.get(`http://localhost:8080/communities/${this.communityId}`, {
+    return axiosInstance.get(`/communities/${this.communityId}`, {
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
         "Authorization": `Bearer ${this.token}`,
       },
     });
