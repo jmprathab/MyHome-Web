@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Importing the Bootstrap CSS
@@ -38,10 +38,12 @@ class App extends React.Component {
       <div>
         <div>
           <NavigationBar />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/signin" component={SignInAndSignUpPage} />
-          </Switch>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/signin" component={SignInAndSignUpPage} />
+            </Switch>
+          </BrowserRouter>
 
           {/* <CommunityList /> */}
         </div>
