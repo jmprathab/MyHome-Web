@@ -8,9 +8,8 @@ export default class GetCommunitiesApi {
     console.debug(
       `Get communities api called with token[${this.token}]`
     );
-    return axiosInstance.get("http://localhost:8080/communities", {
+    return axiosInstance.get("/communities", {
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
         "Authorization": `Bearer ${this.token}`,
       },
     });
