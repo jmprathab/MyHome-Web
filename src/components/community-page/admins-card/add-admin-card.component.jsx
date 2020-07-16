@@ -62,7 +62,7 @@ class AddAdminCard extends Component {
             />
           </div>
           <p></p>
-          <button onClick={this.handleClick} className="btn btn-primary">Add administrator</button>
+          <button onClick={this.handleClick} className="btn btn-primary">Add administrator{this.state.selectedValues ? (this.state.selectedValues.length > 1 ? 's' : '') : ''}</button>
         </div>
       </div>
     )
