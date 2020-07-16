@@ -9,3 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "tobi406"
+    reviewers:
+      - "tobi406"
