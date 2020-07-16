@@ -27,7 +27,7 @@ class CommunityList extends Component {
     return (
       <Container className="mt-5">
         <div className="row">
-          {this.state.communities ? (this.state.communities.map((community) => <div className="col-md-3"><Card id={community.communityId} name={community.name} district={community.district} /></div> )) : ''}
+          {this.state.communities ? (this.state.communities.map((community) => <div key={community.communityId} className="col-md-3"><Card id={community.communityId} name={community.name} district={community.district} /></div> )) : ''}
         </div>
       </Container>
     );
