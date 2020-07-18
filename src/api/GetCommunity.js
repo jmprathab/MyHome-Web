@@ -1,6 +1,6 @@
 import axiosInstance from '../axios/axios';
 
-export default class GetHousesApi {
+export default class GetCommunityApi {
   constructor(communityId, token) {
     this.communityId = communityId;
     this.token = token;
