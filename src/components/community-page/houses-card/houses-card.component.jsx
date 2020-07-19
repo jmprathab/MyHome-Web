@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import GetHousesApi from "../../api/GetHouses";
+import GetHousesApi from "../../../api/GetHouses";
+import HouseEntry from "./house-entry.component";
 
 class HousesCard extends Component {
   constructor(props) {
@@ -7,6 +8,8 @@ class HousesCard extends Component {
     this.state = {
       houses: null,
     };
+
+    this.removeHouse = this.removeHouse.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +24,10 @@ class HousesCard extends Component {
     getHouses(this.props.uuid, this.props.token);
   }
 
+  removeHouse(houseId) {
+    console.log(houseId);
+  }
+
   render() {
     return (
       <div className="w-100 card text-white bg-dark mb-3 d-inline-block">
@@ -28,7 +35,9 @@ class HousesCard extends Component {
           <h4>Houses</h4>
         </div>
         <ul className="list-group list-group-flush bg-dark">
-          {this.state.houses ? this.state.houses.map((house) => <li key={house.houseId} className="list-group-item bg-dark"><a href={`/house/${this.props.uuid}`}>{house.name}</a></li> ) : ''}
+          {this.state.houses ? this.state.houses.map((house) => <li key={house.houseId} className="list-group-item bg-dark">
+            <HouseEntry house={house} />
+          </li> ) : ''}
         </ul>
       </div>
     )

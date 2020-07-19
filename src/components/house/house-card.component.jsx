@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import GetHousesApi from "../../api/GetHouses";
+import GetHouseApi from "../../api/GetHouse";
 
 class HouseCard extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      house: null,
+      data: null,
     };
   }
 
   componentDidMount() {
     const getHouse = async (uuid, token) => {
-      let api = new GetHousesApi(uuid, token);
+      let api = new GetHouseApi(uuid, token);
       let responsePromise = api.getHouse();
       let response = await responsePromise;
-      console.log(response.data);
       this.setState({
-        data: response.data,
+        data: response.data.houses[0],
       });
     }
     getHouse(this.props.uuid, this.props.token);
@@ -26,8 +24,11 @@ class HouseCard extends Component {
 
   render() {
     return (
-      <><Container>
-      </Container></>
+      <div className="w-100 card text-white bg-dark mb-3 d-inline-block">
+        <div className="card-header">
+          <h4>{this.state.data ? this.state.data.name : ''}</h4>
+        </div>
+      </div>
     )
   }
 }
