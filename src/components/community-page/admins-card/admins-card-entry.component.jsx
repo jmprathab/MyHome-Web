@@ -22,6 +22,7 @@ class AdminCardEntry extends Component {
       await responsePromise;
     }
     removeAdmin(this.props.communityId, this.props.uuid, this.props.token);
+    window.location.reload(true);
   }
 
   componentDidMount() {
