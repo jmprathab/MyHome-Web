@@ -12,12 +12,14 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 ![Web Homepage](./screens/WebHomepage.png)
 ![Mobile Homepage](./screens/MobileHomepage.png)
 
+## Installing
+
 ## Prerequisites
 
 - npm
 - You will need backend for this application. Backend is [here](https://github.com/jmprathab/MyHome)
 
-## Installing
+## Building
 
 1. Download the Project to local drive
 2. Run `npm install`
@@ -28,17 +30,15 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 - [Prathab Murugan](https://github.com/jmprathab)
 - [Tobi](https://github.com/Tobi406)
 
-## License
-
-This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Contribution
+## How do I contribute?
 
 Feel free to contribute to the project. Please make sure to follow the below list before contributing.
 
-- Read `CODE_OF_CONDUCT.md`
-- This project uses coding style from https://github.com/square/java-code-styles
-- Make sure all test cases pass before requesting for a PR.
+- Read `CONTRIBUTING.md`
+
+## License
+
+This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
