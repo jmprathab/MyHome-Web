@@ -25,12 +25,12 @@ class AddHouseMembersCard extends Component {
       await responsePromise;
       window.location.reload(false);
     }
-    addMembers(this.state.selectedValues, this.props.uuid, this.props.token);
+    if (this.state.selectedValues) addMembers(this.state.selectedValues, this.props.uuid, this.props.token);
   }
 
-  handleChange = e => {
+  handleChange = v => {
     this.setState({
-      selectedValues: e.map(e => e.value),
+      selectedValues: v ? v.map(e => e.value) : null,
     });
   }
 
@@ -43,6 +43,7 @@ class AddHouseMembersCard extends Component {
               closeMenuOnSelect={false}
               isMulti
               onChange={this.handleChange}
+              placeholder={'Type a member name'}
             />
           </div>
           <p></p>
