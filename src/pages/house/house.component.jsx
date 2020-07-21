@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import HouseCard from "../../components/house/house-card.component";
 import HouseMembersCard from "../../components/house/house-members-card.component";
 import { Container } from "react-bootstrap";
+import AddHouseMembersCard from "../../components/house/add-house-members-card.component";
 
 const HousePage = ({ match, currentUser }) => (
   <div>
@@ -14,6 +15,7 @@ const HousePage = ({ match, currentUser }) => (
         </div>
         <div className="col-md-3">
           <HouseMembersCard uuid={match.params.uuid} token={currentUser.token} />
+          <AddHouseMembersCard uuid={match.params.uuid} token={currentUser.token} />
         </div>
       </div>
     </Container>) : ''}
