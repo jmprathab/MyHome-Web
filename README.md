@@ -29,6 +29,7 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 
 - [Prathab Murugan](https://github.com/jmprathab)
 - [Tobi](https://github.com/Tobi406)
+- [Arkadyuti Bandyopadhyay](https://github.com/ARKEOLOGIST)
 
 ## How do I contribute?
 
