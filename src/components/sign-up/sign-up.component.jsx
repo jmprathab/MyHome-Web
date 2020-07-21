@@ -6,10 +6,11 @@ class BootstrapSignUp extends React.Component {
     super();
 
     this.state = {
-      name: "",
+      status: 0,  //status - 0 indicates component after its initialization (without any login attempts), 1 indicates error due to API call,2 indicates success,3 indicates error due to mismatch of password and confirmPassword fields
       email: "",
+      name: "",
       password: "",
-      confirmPassword: "",
+      confirmPassword: ""
     };
   }
 
@@ -19,7 +20,13 @@ class BootstrapSignUp extends React.Component {
     const { name, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
-      alert("passwords don't match");
+      this.setState({
+         status: 3,
+         email: "",
+         name: "",
+         password: "",
+         confirmPassword: ""
+      })
       return;
     }
 
@@ -42,13 +49,22 @@ class BootstrapSignUp extends React.Component {
     responsePromise
       .then((res) => {
         if (!res.ok) {
-          alert("Cannot create account");
+          this.setState({
+            status: 1
+          });
         } else {
-          alert("Successfully created account");
+          this.setState({
+            status: 2
+          });
         }
         return res.json();
       })
-      .then((res) => console.log(res));
+      .then((res) => console.log(res))
+      .catch((e) => {
+        this.setState({
+          status: 1
+        })
+      });
   };
 
   handleChange = (event) => {
@@ -115,6 +131,7 @@ class BootstrapSignUp extends React.Component {
               Create Account
             </button>
           </div>
+          {this.state.status==1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status==3?<span style={{ color: 'red' }}>Passwords don't match!</span>:this.state.status==2?<span style={{ color: 'green' }}>Signup successful!</span>:null}
         </form>
       </div>
     );
