@@ -1,5 +1,3 @@
-import axiosInstance from "../axios/axios";
-
 export default class AddCommunityAdministratorsApi {
   constructor(values, communityId, token) {
     this.values = values;

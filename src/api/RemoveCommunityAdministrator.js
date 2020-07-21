@@ -1,5 +1,3 @@
-import axiosInstance from "../axios/axios";
-
 export default class RemoveCommunityAdministratorApi {
   constructor(communityId, adminId, token) {
     this.communityId = communityId;

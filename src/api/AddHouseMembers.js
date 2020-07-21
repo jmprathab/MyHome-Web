@@ -1,5 +1,3 @@
-import axiosInstance from "../axios/axios";
-
 export default class AddHouseMembersApi {
   constructor(values, houseId, token) {
     this.values = values;

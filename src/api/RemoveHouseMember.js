@@ -1,5 +1,3 @@
-import axiosInstance from "../axios/axios";
-
 export default class RemoveHouseMemberApi {
   constructor(houseId, memberId, token) {
     this.houseId = houseId;
