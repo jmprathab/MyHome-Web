@@ -31,8 +31,16 @@ class HouseMembersCard extends Component {
           <h4>Members</h4>
         </div>
         <ul className="list-group list-group-flush bg-dark">
-          <li>{JSON.stringify(this.state.members)}</li>
-          {this.state.members ? this.state.members.map(e => <HouseMembersEntry uuid={e.memberId} key={e.memberId} token={this.props.token} />) : ''}
+          {this.state.members ? this.state.members.map(e => 
+            <HouseMembersEntry
+              uuid={e.memberId}
+              key={e.memberId}
+              
+              name={e.name}
+              houseId={this.props.uuid}
+              token={this.props.token}
+            />
+          ) : ''}
         </ul>
       </div>
     )
