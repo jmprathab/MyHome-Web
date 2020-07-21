@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class HeroText extends Component {
   render() {
     return (
-      <div className="container text-center">
+      <div className="container text-center" data-testid={'welcome-message'}>
         <p className="h5 mt-5">
           Welcome to MyHome Web Application
           <br />
