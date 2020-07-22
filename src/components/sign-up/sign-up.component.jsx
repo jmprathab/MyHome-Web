@@ -131,7 +131,7 @@ class BootstrapSignUp extends React.Component {
               Create Account
             </button>
           </div>
-          {this.state.status==1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status==3?<span style={{ color: 'red' }}>Passwords don't match!</span>:this.state.status==2?<span style={{ color: 'green' }}>Signup successful!</span>:null}
+          {this.state.status===1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status===3?<span style={{ color: 'red' }}>Passwords don't match!</span>:this.state.status===2?<span style={{ color: 'green' }}>Signup successful!</span>:null}
         </form>
       </div>
     );

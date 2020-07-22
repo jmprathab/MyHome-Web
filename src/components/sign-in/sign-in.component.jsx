@@ -120,7 +120,7 @@ class SignIn extends React.Component {
               Sign In
             </button>
           </div>
-          {this.state.status==1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status==2?<span style={{ color: 'green' }}>Login successful! Redirecting.....</span>:null}
+          {this.state.status===1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status===2?<span style={{ color: 'green' }}>Login successful! Redirecting.....</span>:null}
         </form>
       </div>
     );
