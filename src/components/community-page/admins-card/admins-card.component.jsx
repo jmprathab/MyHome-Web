@@ -31,7 +31,7 @@ class AdminCard extends Component {
           <h4>Community Administrators</h4>
         </div>
         <ul className="list-group list-group-flush bg-dark">
-          {this.state.adminIds ? (this.state.adminIds.map((id) => <AdminsCardEntry key={id.adminId} uuid={id.adminId} token={this.props.token} />)) : ''}
+          {this.state.adminIds ? (this.state.adminIds.map((id) => <AdminsCardEntry communityId={this.props.uuid} key={id.adminId} uuid={id.adminId} token={this.props.token} />)) : ''}
         </ul>
       </div>
     )

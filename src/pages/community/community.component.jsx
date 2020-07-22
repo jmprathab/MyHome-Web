@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import AdminsCard from "../../components/community-page/admins-card/admins-card.component";
 import AddAdminCard from "../../components/community-page/admins-card/add-admin-card.component";
 import DetailCard from "../../components/community-page/detail-card.component";
-import HousesCard from "../../components/community-page/houses-card.component";
+import HousesCard from "../../components/community-page/houses-card/houses-card.component";
 
 const CommunityPage = ({ match, currentUser }) => (
   <div>

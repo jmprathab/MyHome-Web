@@ -40,12 +40,12 @@ class AddAdminCard extends Component {
       await responsePromise;
       window.location.reload(false);
     }
-    addAdmins(this.state.selectedValues, this.props.uuid, this.props.token);
+    if (this.state.selectedValues) addAdmins(this.state.selectedValues, this.props.uuid, this.props.token);
   }
 
   handleChange = e => {
     this.setState({
-      selectedValues: e.map(e => e.value),
+      selectedValues: e ? e.map(e => e.value)  : null,
     });
   }
 
