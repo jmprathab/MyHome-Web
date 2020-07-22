@@ -5,7 +5,7 @@ import CommunityList from "../../components/community-list/community-list.compon
 
 const HomePage = ({ currentUser }) => (
   <div>
-    <HeroText />
+    {!currentUser && <HeroText />}
     {currentUser ? <CommunityList token={currentUser.token} /> : ''}
   </div>
 );
