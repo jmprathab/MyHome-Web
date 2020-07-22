@@ -9,7 +9,6 @@ class HeroText extends Component {
           <br />
           This Application helps people manage their apartments
           <br />
-          <a href="signin">Login</a> to continue
         </p>
       </div>
     );

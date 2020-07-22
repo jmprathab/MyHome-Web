@@ -6,6 +6,7 @@ import CommunityList from "../../components/community-list/community-list.compon
 const HomePage = ({ currentUser }) => (
   <div>
     <HeroText />
+    {currentUser? '' : <div className="container text-center"><h5><a href="signin">Login</a> to continue</h5></div>}
     {currentUser ? <CommunityList token={currentUser.token} /> : ''}
   </div>
 );
