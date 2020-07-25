@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContentBetween from "../common/content-between.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import AlignMiddle from "../common/align-middle.component";
 
 class RemoveableEntry extends Component {
   constructor(props) {
@@ -18,10 +19,12 @@ class RemoveableEntry extends Component {
     return (
       <ContentBetween>
         {this.props.children}
-        <FontAwesomeIcon
-          onClick={this.callRemoveFunction}
-          icon={faTimes}
-        />
+          <AlignMiddle>
+            <FontAwesomeIcon
+              onClick={this.callRemoveFunction}
+              icon={faTimes}
+            />
+          </AlignMiddle>
       </ContentBetween>
     )
   }
