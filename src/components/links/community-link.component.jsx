@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Link from "./link.component";
+import Link from "./link-impl.component";
 
 class CommunityLink extends Component {
   render() {

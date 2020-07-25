@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Link from './link.component';
+import LinkImpl from './link-impl.component';
 
 class UserLink extends Component {
   render() {
     return (
-      <Link
+      <LinkImpl
         link={`/user/${this.props.id}`}
       >
         {this.props.name}
-      </Link>
+      </LinkImpl>
     )
   }
 }
