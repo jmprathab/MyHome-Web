@@ -8,7 +8,7 @@ export default class CommunityAdminsApi {
   }
 
   getAdmins() {
-    console.trace(`Get admins api function called with communityId[${this.communityId}], token[${this.token}]`);
+    console.debug(`Get admins api function called with communityId[${this.communityId}], token[${this.token}]`);
     return axiosInstance.get(`/communities/${this.communityId}/admins`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -17,7 +17,7 @@ export default class CommunityAdminsApi {
   }
 
   addAdmins(values) {
-    console.trace(`Add admins api function called with values[${values}], communityId[${this.communityId}], token[${this.token}]`);
+    console.debug(`Add admins api function called with values[${values}], communityId[${this.communityId}], token[${this.token}]`);
     return axiosInstance.post(`/communities/${this.communityId}/admins`, {
       admins: values,
     }, {
@@ -28,7 +28,7 @@ export default class CommunityAdminsApi {
   }
 
   removeAdmin(adminId) {
-    console.trace(`Remove admins api function called with adminId[${adminId}], communityId[${this.communityId}], token[${this.token}]`);
+    console.debug(`Remove admins api function called with adminId[${adminId}], communityId[${this.communityId}], token[${this.token}]`);
     return axiosInstance.delete(`/communities/${this.communityId}/admins/${adminId}`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,

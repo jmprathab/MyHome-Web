@@ -7,7 +7,7 @@ export default class UsersApi {
   }
 
   getUser(userId) {
-    console.trace(`Get user api function called with userId[${userId}], token[${this.token}]`);
+    console.debug(`Get user api function called with userId[${userId}], token[${this.token}]`);
     return axiosInstance.get(`/users/${userId}`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -16,7 +16,7 @@ export default class UsersApi {
   }
 
   getUsers() {
-    console.trace(`Get users api function called with token[${this.token}]`);
+    console.debug(`Get users api function called with token[${this.token}]`);
     return axiosInstance.get('/users', {
       headers: {
         'Authorization': `Bearer ${this.token}`,

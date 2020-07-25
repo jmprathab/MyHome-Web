@@ -7,7 +7,7 @@ export default class HousesApi {
   }
 
   getHouse(houseId) {
-    console.trace(`Get house api function called with houseId[${houseId}], token[${this.token}]`);
+    console.debug(`Get house api function called with houseId[${houseId}], token[${this.token}]`);
     return axiosInstance.get(`/houses/${houseId}`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -16,7 +16,7 @@ export default class HousesApi {
   }
   
   getHouseMembers(houseId) {
-    console.trace(`Get house members api function called with houseId[${houseId}], token[${this.token}]`);
+    console.debug(`Get house members api function called with houseId[${houseId}], token[${this.token}]`);
     return axiosInstance.get(`/houses/${houseId}/members`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -25,7 +25,7 @@ export default class HousesApi {
   }
 
   addHouseMembers(houseId, values) {
-    console.trace(`Add house members api function called with houseId[${houseId}], values[${values}], token[${this.token}]`);
+    console.debug(`Add house members api function called with houseId[${houseId}], values[${values}], token[${this.token}]`);
     return axiosInstance.post(`/houses/${houseId}/members`, {
       members: values,
     }, {
@@ -36,7 +36,7 @@ export default class HousesApi {
   }
 
   removeHouseMember(houseId, memberId) {
-    console.trace(`Remove house members api function called with houseId[${houseId}], memberId[${memberId}], token[${this.token}]`);
+    console.debug(`Remove house members api function called with houseId[${houseId}], memberId[${memberId}], token[${this.token}]`);
     return fetch(`http://localhost:8080/houses/${houseId}/members/${memberId}`, {
       method: "DELETE",
       headers: {
@@ -48,7 +48,7 @@ export default class HousesApi {
   }
 
   getHousesOfCommunity(communityId) {
-    console.trace(`Get houses of community api function called with communityId[${communityId}], token[${this.token}]`);
+    console.debug(`Get houses of community api function called with communityId[${communityId}], token[${this.token}]`);
     return axiosInstance.get(`/communities/${communityId}/houses`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,

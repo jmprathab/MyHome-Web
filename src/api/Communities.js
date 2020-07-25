@@ -7,7 +7,7 @@ export default class CommunitiesApi {
   }
 
   getCommunity(communityId) {
-    console.trace(`Get community api function called with communityId[${communityId}], token[${this.token}]`);
+    console.debug(`Get community api function called with communityId[${communityId}], token[${this.token}]`);
     return axiosInstance.get(`/communities/${communityId}`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -16,7 +16,7 @@ export default class CommunitiesApi {
   }
 
   getCommunities() {
-    console.trace(`Get communities api function called with token[${this.token}]`);
+    console.debug(`Get communities api function called with token[${this.token}]`);
     return axiosInstance.get(`/communities`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
