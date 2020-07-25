@@ -3,7 +3,7 @@ import store from "../redux/store";
 
 export default class CommunitiesApi {
   constructor() {
-    this.token = store.getState().user.currentUser.token;
+    this.token = store.getState().user.currentUser ? store.getState().user.currentUser.token : '';
   }
 
   getCommunity(communityId) {

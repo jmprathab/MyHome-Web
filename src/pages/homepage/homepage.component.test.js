@@ -3,7 +3,6 @@ import {render} from "@testing-library/react";
 import HomePage from "./homepage.component";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
-import {UserActionTypes} from "../../redux/user/user.types";
 
 describe('Home Page', () => {
 
