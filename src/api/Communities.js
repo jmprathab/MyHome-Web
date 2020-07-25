@@ -15,6 +15,27 @@ export default class CommunitiesApi {
     });
   }
 
+  createCommunity(name, district) {
+    console.debug(`Create community api function called with name[${name}], district[${district}], token[${this.token}]`);
+    return axiosInstance.post(`/communities`, {
+      name: name,
+      district: district,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
+
+  deleteCommunity(communityId) {
+    console.debug(`Delete community api function called with communityId[${communityId}], token[${this.token}]`);
+    return axiosInstance.delete(`/communities/${communityId}`, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
+
   getCommunities() {
     console.debug(`Get communities api function called with token[${this.token}]`);
     return axiosInstance.get(`/communities`, {
