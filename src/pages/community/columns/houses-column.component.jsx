@@ -6,11 +6,13 @@ import HousesApi from "../../../api/Houses";
 import RemoveableEntry from "../../../components/card/removeable-entry.component";
 import HouseLink from "../../../components/links/house-link.component";
 import CardListEntry from "../../../components/card/card-list-entry.component";
+import SelectCard from "../../../components/card/select-card.component";
 
 class HousesColumn extends Component {
   constructor(props) {
     super(props);
 
+    this.onSubmit = this.onSubmit.bind(this);
     this.removeHouse = this.removeHouse.bind(this);
 
     this.state = {
@@ -30,6 +32,20 @@ class HousesColumn extends Component {
 
   removeHouse() {
     // No method on back-end (yet)
+  }
+
+  onSubmit(values) {
+    const addHouses = async () => {
+      values = values.map((value) => {
+        return {
+          houseId: value,
+          name: value,
+        };
+      });
+      await new HousesApi().addHouses(this.props.communityId, values);
+      window.location.reload();
+    };
+    addHouses();
   }
 
   render() {
@@ -56,6 +72,15 @@ class HousesColumn extends Component {
                 }}
               />
             </Card>
+
+            <SelectCard
+              creatable
+              options={[]}
+              placeholder={'Type house name'}
+              submitText={'Add house'}
+              submitFunction={this.onSubmit}
+              pluralS
+            />
           </>
         ) : ''}
       </>

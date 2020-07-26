@@ -14,6 +14,17 @@ export default class HousesApi {
       },
     });
   }
+
+  addHouses(communityId, values) {
+    console.debug(`Create house api function called with communityId[${communityId}], values[${values}], token[${this.token}]`);
+    return axiosInstance.post(`/communities/${communityId}/houses`, {
+      houses: values,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
   
   getHouseMembers(houseId) {
     console.debug(`Get house members api function called with houseId[${houseId}], token[${this.token}]`);
