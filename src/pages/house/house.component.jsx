@@ -1,24 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import HouseCard from "../../components/house/house-card.component";
-import HouseMembersCard from "../../components/house/house-members-card.component";
 import { Container } from "react-bootstrap";
-import AddHouseMembersCard from "../../components/house/add-house-members-card.component";
+import Column from "../../components/common/column.component";
+import PageRow from "../../components/common/page-row.component";
+import DetailColumn from "./columns/detail-column.component";
+import MemberColumn from "./columns/member-column.component";
 
 const HousePage = ({ match, currentUser }) => (
   <div>
-    {currentUser ? (<Container>
-      <div className="mt-5 row">
-        <div className="col-md-9">
-          <HouseCard uuid={match.params.uuid} token={currentUser.token} />
-        </div>
-        <div className="col-md-3">
-          <HouseMembersCard uuid={match.params.uuid} token={currentUser.token} />
-          <AddHouseMembersCard uuid={match.params.uuid} token={currentUser.token} />
-        </div>
-      </div>
-    </Container>) : ''}
+    {currentUser ? (
+      <Container>
+        <PageRow>
+          <Column cols={9}>
+            <DetailColumn houseId={match.params.uuid} />
+          </Column>
+          <Column cols={3}>
+            <MemberColumn houseId={match.params.uuid} />
+          </Column>
+        </PageRow>
+      </Container>
+    ) : ''}
   </div>
 );
 
