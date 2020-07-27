@@ -1,5 +1,5 @@
 import React from "react";
-import CreateUserApi from "../../api/CreateUser";
+import AccountsApi from "../../api/Accounts";
 
 class BootstrapSignUp extends React.Component {
   constructor() {
@@ -44,11 +44,11 @@ class BootstrapSignUp extends React.Component {
   };
 
   createUser = (name, email, password) => {
-    let api = new CreateUserApi(name, email, password);
-    let responsePromise = api.createUser();
+    let api = new AccountsApi();
+    let responsePromise = api.createUser(name, email, password);
     responsePromise
       .then((res) => {
-        if (!res.ok) {
+        if (!res.status === 200) {
           this.setState({
             status: 1
           });
@@ -57,7 +57,7 @@ class BootstrapSignUp extends React.Component {
             status: 2
           });
         }
-        return res.json();
+        return res.data;
       })
       .then((res) => console.log(res))
       .catch((e) => {

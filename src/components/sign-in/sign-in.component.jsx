@@ -1,8 +1,8 @@
 import React from "react";
-import LoginUserApi from "../../api/LoginUser";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { setCurrentUser } from "../../redux/user/user.actions";
+import AccountsApi from "../../api/Accounts";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -61,8 +61,8 @@ class SignIn extends React.Component {
   };
 
   loginUser = (email, password, setCurrentUser) => {
-    let api = new LoginUserApi(email, password);
-    let responsePromise = api.loginUser();
+    let api = new AccountsApi();
+    let responsePromise = api.loginUser(email, password);
 
     responsePromise
       .then((res) => {

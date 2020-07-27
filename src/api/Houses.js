@@ -48,14 +48,19 @@ export default class HousesApi {
 
   removeHouseMember(houseId, memberId) {
     console.debug(`Remove house members api function called with houseId[${houseId}], memberId[${memberId}], token[${this.token}]`);
-    return fetch(`http://localhost:8080/houses/${houseId}/members/${memberId}`, {
-      method: "DELETE",
+    return axiosInstance.delete(`/houses/${houseId}/members/${memberId}`, {
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        
         'Authorization': `Bearer ${this.token}`,
       },
     });
+    //return fetch(`http://localhost:8080/houses/${houseId}/members/${memberId}`, {
+    //  method: "DELETE",
+    //  headers: {
+    //    'Content-type': 'application/json; charset=UTF-8',
+    //    
+    //    'Authorization': `Bearer ${this.token}`,
+    //  },
+    //});
   }
 
   getHousesOfCommunity(communityId) {
