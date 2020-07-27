@@ -18,6 +18,7 @@ const NavigationBar = ({ currentUser, setCurrentUser }) => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/community/new">Create community</Nav.Link>
           {currentUser ? (
             <Nav.Link to="/signin" onClick={(e) => doSignOut(setCurrentUser)}>
               Logout
