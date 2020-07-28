@@ -6,6 +6,7 @@ import PageRow from "../../../components/common/page-row.component";
 import Column from "../../../components/common/column.component";
 import Card from "../../../components/card/card.component";
 import CommunitiesApi from "../../../api/Communities";
+import {CardDeck} from 'react-bootstrap';
 
 class CommunityList extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class CommunityList extends Component {
                   title={community.name}
                   textSubtitle={community.district}
                   body={
-                    <Button href={`/community/${community.communityId}`}>
+                    <Button className={'mt-auto'} href={`/community/${community.communityId}`}>
                       View
                     </Button>
                   }
@@ -46,6 +47,23 @@ class CommunityList extends Component {
             })
           ) : ''}
         </PageRow>
+        {/*<CardDeck>*/}
+        {/*  {this.state.communities ? (*/}
+        {/*      this.state.communities.map(community => {*/}
+        {/*        return (*/}
+        {/*            <Card*/}
+        {/*              title={community.name}*/}
+        {/*              textSubtitle={community.district}*/}
+        {/*              body={*/}
+        {/*                <Button href={`/community/${community.communityId}`}>*/}
+        {/*                  View*/}
+        {/*                </Button>*/}
+        {/*              }*/}
+        {/*              />*/}
+        {/*        )*/}
+        {/*      })*/}
+        {/*  ) : ''}*/}
+        {/*</CardDeck>*/}
       </Container>
     );
   }
