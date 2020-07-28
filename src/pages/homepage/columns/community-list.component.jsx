@@ -6,7 +6,6 @@ import PageRow from "../../../components/common/page-row.component";
 import Column from "../../../components/common/column.component";
 import Card from "../../../components/card/card.component";
 import CommunitiesApi from "../../../api/Communities";
-import {CardDeck} from 'react-bootstrap';
 
 class CommunityList extends Component {
   constructor(props) {
