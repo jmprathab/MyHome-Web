@@ -47,23 +47,6 @@ class CommunityList extends Component {
             })
           ) : ''}
         </PageRow>
-        {/*<CardDeck>*/}
-        {/*  {this.state.communities ? (*/}
-        {/*      this.state.communities.map(community => {*/}
-        {/*        return (*/}
-        {/*            <Card*/}
-        {/*              title={community.name}*/}
-        {/*              textSubtitle={community.district}*/}
-        {/*              body={*/}
-        {/*                <Button href={`/community/${community.communityId}`}>*/}
-        {/*                  View*/}
-        {/*                </Button>*/}
-        {/*              }*/}
-        {/*              />*/}
-        {/*        )*/}
-        {/*      })*/}
-        {/*  ) : ''}*/}
-        {/*</CardDeck>*/}
       </Container>
     );
   }
