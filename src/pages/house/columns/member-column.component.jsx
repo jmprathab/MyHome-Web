@@ -43,10 +43,9 @@ class MemberColumn extends Component {
   }
 
   removeMember(obj) {
-    // Not working due to back-end issue
     const removeMember = async () => {
-      //await new HousesApi().removeHouseMember(this.props.houseId, obj);
-      //window.location.reload();
+      await new HousesApi().removeHouseMember(this.props.houseId, obj);
+      window.location.reload();
     };
     removeMember();
   }
