@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import HeroText from "../../components/hero-text/hero-text.component";
-import CommunityList from "../../components/community-list/community-list.component";
+import CommunityList from "./columns/community-list.component";
 
 const HomePage = ({ currentUser }) => (
   <div>
-    <HeroText />
-    {currentUser ? <CommunityList token={currentUser.token} /> : ''}
+    {!currentUser && <HeroText />}
+    {currentUser ? <CommunityList /> : ''}
   </div>
 );
 

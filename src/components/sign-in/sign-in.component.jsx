@@ -1,13 +1,15 @@
 import React from "react";
-import LoginUserApi from "../../api/LoginUser";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import { setCurrentUser } from "../../redux/user/user.actions";
+import AccountsApi from "../../api/Accounts";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      status: 0,  //status - 0 indicates component after its initialization (without any login attempts), 1 indicates error,2 indicates success
       email: "",
       password: "",
     };
@@ -36,6 +38,7 @@ class SignIn extends React.Component {
 
   updateUserState = (userToken, userId, setCurrentUser) => {
     // Persist user details to localStorage
+
     localStorage.setItem(
       "userInfo",
       JSON.stringify({
@@ -48,14 +51,22 @@ class SignIn extends React.Component {
       userId: userId,
       token: userToken,
     });
+
+    this.setState({
+      status: 2
+    });
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 2000);
   };
 
   loginUser = (email, password, setCurrentUser) => {
-    let api = new LoginUserApi(email, password);
-    let responsePromise = api.loginUser();
+    let api = new AccountsApi();
+    let responsePromise = api.loginUser(email, password);
 
     responsePromise
       .then((res) => {
+        console.log(res);
         return {
           userId: res.headers.userid,
           userToken: res.headers.token,
@@ -65,6 +76,12 @@ class SignIn extends React.Component {
         console.log(userId);
         console.log(userToken);
         this.updateUserState(userToken, userId, setCurrentUser);
+      }).catch((e) => {
+        this.setState({
+          status: 1,
+          email: "",
+          password: ""
+        });
       });
 
     // Now dispatch an action to update the state
@@ -103,6 +120,7 @@ class SignIn extends React.Component {
               Sign In
             </button>
           </div>
+          {this.state.status===1?<span style={{ color: 'red' }}>An error occurred!</span>:this.state.status===2?<span style={{ color: 'green' }}>Login successful! Redirecting.....</span>:null}
         </form>
       </div>
     );
@@ -117,4 +135,4 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));

@@ -8,8 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import CommunityPage from "./pages/community/community.component";
+import CreateCommunityPage from "./pages/community/create-community.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import HomePage from "./pages/homepage/homepage.component";
+import HousePage from "./pages/house/house.component";
+import UserPage from "./pages/users/users.component";
 import NavigationBar from "./components/navigation-bar/navigation-bar.component";
 
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -43,7 +46,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/signin" component={SignInAndSignUpPage} />
+              <Route exact path="/community/new" component={CreateCommunityPage} />
               <Route exact path="/community/:uuid" component={CommunityPage} />
+              <Route exact path="/user/:uuid" component={UserPage} />
+              <Route exact path="/house/:uuid" component={HousePage} />
             </Switch>
           </BrowserRouter>
           {/* <CommunityList /> */}

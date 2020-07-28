@@ -2,27 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 import { Container } from "react-bootstrap";
 
-import AdminsCard from "../../components/community-page/admins-card/admins-card.component";
-import AddAdminCard from "../../components/community-page/admins-card/add-admin-card.component";
-import DetailCard from "../../components/community-page/detail-card.component";
-import HousesCard from "../../components/community-page/houses-card.component";
+import Column from "../../components/common/column.component";
+import PageRow from "../../components/common/page-row.component";
+import AdminColumn from "./columns/admin-column.component";
+import DetailColumn from "./columns/detail-column.component";
+import HousesColumn from "./columns/houses-column.component";
 
 const CommunityPage = ({ match, currentUser }) => (
   <div>
-    {currentUser ? (<Container>
-      <div className="mt-5 row">
-        <div className="col-md-6">
-          <DetailCard uuid={match.params.uuid} token={currentUser.token} />
-        </div> 
-        <div className="col-md-3">
-          <HousesCard uuid={match.params.uuid} token={currentUser.token} />
-        </div>
-        <div className="col-md-3">
-          <AdminsCard uuid={match.params.uuid} token={currentUser.token} />
-          <AddAdminCard uuid={match.params.uuid} token={currentUser.token} />
-        </div>
-      </div>
-    </Container>) : ''}
+    {currentUser ? (
+      <Container>
+        <PageRow>
+          <Column cols={6}>
+            <DetailColumn communityId={match.params.uuid} />
+          </Column>
+          <Column cols={3}>
+            <HousesColumn communityId={match.params.uuid} />
+          </Column>
+          <Column cols={3}>
+            <AdminColumn communityId={match.params.uuid} />
+          </Column>
+        </PageRow>
+      </Container>
+    ) : ''}
   </div>
 )
 
