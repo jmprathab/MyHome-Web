@@ -36,6 +36,8 @@ class CommunityList extends Component {
                 <Card
                   title={community.name}
                   textSubtitle={community.district}
+                  cardClasses={'h-100'}
+                  bodyClasses={'h-100'}
                   body={
                     <Button href={`/community/${community.communityId}`}>
                       View
