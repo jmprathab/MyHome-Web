@@ -37,7 +37,7 @@ class CommunityList extends Component {
                   title={community.name}
                   textSubtitle={community.district}
                   body={
-                    <Button href={`/community/${community.communityId}`}>
+                    <Button className={'mt-auto'} href={`/community/${community.communityId}`}>
                       View
                     </Button>
                   }
