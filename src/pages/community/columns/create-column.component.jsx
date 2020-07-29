@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+
 import CommunitiesApi from "../../../api/Communities";
 
 class CreateColumn extends Component {
@@ -57,8 +59,7 @@ class CreateColumn extends Component {
         return res.data;
       })
       .then((res) => {
-        console.log(res);
-        return res.communityId;
+        this.props.history.push(`/community/${res.communityId}`);
       })
       .catch((e) => {
         console.error(e);
@@ -109,7 +110,7 @@ class CreateColumn extends Component {
             ) : ''}
             {this.state.status === 2 ? (
               <span style={{color: 'green'}}>
-                Creation successfull! Redirecting...
+                Creation successfull!
               </span>
             ) : ''}
             {this.state.status === 3 ? (
@@ -124,4 +125,4 @@ class CreateColumn extends Component {
   }
 }
 
-export default CreateColumn;
+export default withRouter(CreateColumn);
