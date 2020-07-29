@@ -12,10 +12,10 @@ const HousePage = ({ match, currentUser }) => (
     {currentUser ? (
       <Container>
         <PageRow>
-          <Column cols={9}>
+          <Column cols={8}>
             <DetailColumn houseId={match.params.uuid} />
           </Column>
-          <Column cols={3}>
+          <Column cols={4}>
             <MemberColumn houseId={match.params.uuid} />
           </Column>
         </PageRow>

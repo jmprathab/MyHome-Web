@@ -5,6 +5,12 @@ import CardList from "../../../components/card/card-list.component";
 import RemoveableEntry from "../../../components/card/removeable-entry.component";
 import CardListEntry from "../../../components/card/card-list-entry.component";
 import SelectCard from "../../../components/card/select-card.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile, faFileAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Button, Form } from "react-bootstrap";
+import FormFileInput from "react-bootstrap/esm/FormFileInput";
+import AlignMiddle from "../../../components/common/align-middle.component";
+import ContentBetween from "../../../components/common/content-between.component";
 
 class MemberColumn extends Component {
   constructor(props) {
@@ -65,6 +71,62 @@ class MemberColumn extends Component {
                       <RemoveableEntry
                         removeFunction={this.removeMember}
                         removeObj={member.memberId}
+                        expandable
+                        collapsedText={
+                          <>
+                            <h5>Documents</h5>
+                            <ul>
+                              <li>
+                                <ContentBetween>
+                                  <div>
+                                    <FontAwesomeIcon
+                                      className="mr-1"
+                                      icon={faFile}
+                                    />
+                                    <a href="#">
+                                      Thing.file
+                                    </a>
+                                  </div>
+                                  <AlignMiddle>
+                                    <FontAwesomeIcon
+                                      className="mr-3"
+                                      icon={faTimes}
+                                    />
+                                  </AlignMiddle>
+                                </ContentBetween>
+                              </li>
+                              <li>
+                                <ContentBetween>
+                                  <div>
+                                    <FontAwesomeIcon
+                                      className="mr-1"
+                                      icon={faFileAlt}
+                                    />
+                                    <a href="#">
+                                      Thing.txt
+                                    </a>
+                                  </div>
+                                  <AlignMiddle>
+                                    <FontAwesomeIcon
+                                      className="mr-3"
+                                      icon={faTimes}
+                                    />
+                                  </AlignMiddle>
+                                </ContentBetween>
+                              </li>
+                            </ul>
+
+                            <Form className="my-2">
+                              <Form.Group controlId="formFileInput">
+                                <Form.File multiple></Form.File>
+                              </Form.Group>
+                            </Form>
+
+                            <Button className="w-100" variant="primary">
+                              Add files
+                            </Button>
+                          </>
+                        }
                       >
                         {member.name}
                       </RemoveableEntry>
