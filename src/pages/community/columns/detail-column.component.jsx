@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+
 import Card from "../../../components/card/card.component";
 import CommunitiesApi from "../../../api/Communities";
 import ContentBetween from "../../../components/common/content-between.component";
@@ -46,6 +48,7 @@ class DetailColumn extends Component {
     const deleteCommunity = async () => {
       const response = await new CommunitiesApi().deleteCommunity(this.props.communityId);
       console.log(response.data);
+      this.props.history.push('/');
     };
     deleteCommunity();
   }
@@ -85,4 +88,4 @@ class DetailColumn extends Component {
   }
 }
 
-export default DetailColumn;
+export default withRouter(DetailColumn);
