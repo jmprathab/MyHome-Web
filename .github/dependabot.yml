@@ -10,6 +10,6 @@ updates:
     schedule:
       interval: "daily"
     assignees:
-      - "tobi406"
+      - "jmprathab"
     reviewers:
-      - "tobi406"
+      - "jmprathab"
