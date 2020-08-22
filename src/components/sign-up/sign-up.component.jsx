@@ -89,6 +89,7 @@ class BootstrapSignUp extends React.Component {
               id="createAccountInputName"
               value={name}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -100,6 +101,7 @@ class BootstrapSignUp extends React.Component {
               id="createAccountInputEmail"
               value={email}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -111,6 +113,7 @@ class BootstrapSignUp extends React.Component {
               onChange={this.handleChange}
               className="form-control"
               id="createAccountInputPassword"
+              required
             />
           </div>
           <div className="form-group">
@@ -124,6 +127,7 @@ class BootstrapSignUp extends React.Component {
               id="createAccountInputConfirmPassword"
               value={confirmPassword}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
