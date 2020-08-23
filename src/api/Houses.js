@@ -25,6 +25,15 @@ export default class HousesApi {
       },
     });
   }
+
+  removeHouse(communityId, houseId) {
+    console.debug(`Remove house api function called with communityId[${communityId}], houseId[${houseId}], token[${this.token}]`);
+    return axiosInstance.delete(`/communities/${communityId}/houses/${houseId}`, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
   
   getHouseMembers(houseId) {
     console.debug(`Get house members api function called with houseId[${houseId}], token[${this.token}]`);
