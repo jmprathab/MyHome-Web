@@ -84,6 +84,7 @@ class CreateColumn extends Component {
               className="form-control"
               value={name}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -95,6 +96,7 @@ class CreateColumn extends Component {
               className="form-control"
               value={district}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
