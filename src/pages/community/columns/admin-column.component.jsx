@@ -22,40 +22,45 @@ class AdminColumn extends Component {
   }
 
   componentDidMount() {
-    const getData = async () => {
-      const response = await new CommunityAdminsApi(this.props.communityId).getAdmins();
-      response.data.admins.map(v => v.adminId).forEach(async (id) => {
-        const userResponse = await new UsersApi().getUser(id);
-        const modifiedData = this.state.data;
-        modifiedData.push({
-          id: userResponse.data.userId,
-          name: userResponse.data.name,
-        });
-        this.setState({
-          data: modifiedData,
-        });
-      });
-    };
-    getData();
+    this.getFullData();
+  }
 
-    const getOptions = async () => {
-      const response = await new UsersApi().getUsers();
-      this.setState({
-        options: response.data.users.map(v => {
-                  return {
-                    value: v.userId,
-                    label: v.name,
-                  };
-                }),
+  getFullData = async () => {
+    await this.getData();
+    await this.getOptions();
+  }
+
+  getData = async () => {
+    const response = await new CommunityAdminsApi(this.props.communityId).getAdmins();
+    response.data.admins.map(v => v.adminId).forEach(async (id) => {
+      const userResponse = await new UsersApi().getUser(id);
+      const modifiedData = this.state.data;
+      modifiedData.push({
+        id: userResponse.data.userId,
+        name: userResponse.data.name,
       });
-    };
-    getOptions();
+      this.setState({
+        data: modifiedData,
+      });
+    });
+  }
+
+  getOptions = async () => {
+    const response = await new UsersApi().getUsers();
+    this.setState({
+      options: response.data.users.map(v => {
+                return {
+                  value: v.userId,
+                  label: v.name,
+                };
+              }),
+    });
   }
 
   onSubmit(values) {
     const addAdmins = async () => {
       await new CommunityAdminsApi(this.props.communityId).addAdmins(values);
-      window.location.reload();
+      await this.getFullData();
     };
     addAdmins();
   }
@@ -63,7 +68,7 @@ class AdminColumn extends Component {
   removeAdmin(obj) {
     const removeAdmins = async () => {
       await new CommunityAdminsApi(this.props.communityId).removeAdmin(obj);
-      window.location.reload(false);
+      await this.getFullData();
     };
     removeAdmins();
   }

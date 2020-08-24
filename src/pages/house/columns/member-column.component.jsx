@@ -19,13 +19,14 @@ class MemberColumn extends Component {
   }
 
   componentDidMount() {
-    const getData = async () => {
-      const response = await new HousesApi().getHouseMembers(this.props.houseId);
-      this.setState({
-        data: response.data.members,
-      });
-    };
-    getData();
+    this.getData();
+  }
+
+  getData = async () => {
+    const response = await new HousesApi().getHouseMembers(this.props.houseId);
+    this.setState({
+      data: response.data.members,
+    });
   }
 
   onSubmit(values) {
@@ -37,7 +38,7 @@ class MemberColumn extends Component {
         };
       });
       await new HousesApi().addHouseMembers(this.props.houseId, values);
-      window.location.reload();
+      await this.getData();
     };
     addMembers();
   }
@@ -45,7 +46,7 @@ class MemberColumn extends Component {
   removeMember(obj) {
     const removeMember = async () => {
       await new HousesApi().removeHouseMember(this.props.houseId, obj);
-      window.location.reload();
+      await this.getData();
     };
     removeMember();
   }

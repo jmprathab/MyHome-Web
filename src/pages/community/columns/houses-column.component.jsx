@@ -21,17 +21,22 @@ class HousesColumn extends Component {
   }
 
   componentDidMount() {
-    const getData = async () => {
-      const response = await new HousesApi().getHousesOfCommunity(this.props.communityId);
-      this.setState({
-        data: response.data.houses,
-      });
-    };
-    getData();
+    this.getData();
   }
 
-  removeHouse() {
-    // No method on back-end (yet)
+  getData = async () => {
+    const response = await new HousesApi().getHousesOfCommunity(this.props.communityId);
+    this.setState({
+      data: response.data.houses,
+    });
+  }
+
+  removeHouse(houseId) {
+    const removeHouse = async (communityId, houseId) => {
+      await new HousesApi().removeHouse(communityId, houseId);
+      await this.getData();
+    };
+    removeHouse(this.props.communityId, houseId);
   }
 
   onSubmit(values) {
@@ -43,7 +48,7 @@ class HousesColumn extends Component {
         };
       });
       await new HousesApi().addHouses(this.props.communityId, values);
-      window.location.reload();
+      this.getData();
     };
     addHouses();
   }
