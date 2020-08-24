@@ -27,9 +27,11 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 
 ## Contributors
 
-- [Prathab Murugan](https://github.com/jmprathab)
-- [Tobi](https://github.com/Tobi406)
-- [Arkadyuti Bandyopadhyay](https://github.com/ARKEOLOGIST)
+<a href="https://github.com/jmprathab/MyHome-Web/graphs/contributors">
+  <img src="https://contributors-img.firebaseapp.com/image?repo=jmprathab/MyHome-Web" />
+</a>
+
+Made with [contributors-img](https://contributors-img.firebaseapp.com)
 
 ## How do I contribute?
 
