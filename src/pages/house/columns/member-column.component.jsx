@@ -11,6 +11,7 @@ import { Button, Form } from "react-bootstrap";
 import FormFileInput from "react-bootstrap/esm/FormFileInput";
 import AlignMiddle from "../../../components/common/align-middle.component";
 import ContentBetween from "../../../components/common/content-between.component";
+import DocumentsApi from "../../../api/Documents";
 
 class MemberColumn extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class MemberColumn extends Component {
 
     this.state = {
       data: null,
+      documents: {},
     };
   }
 
@@ -30,8 +32,32 @@ class MemberColumn extends Component {
       this.setState({
         data: response.data.members,
       });
+      console.log(this.state.data);
+      await this.state.data.map(async (member) => {
+        const documents = this.state.documents;
+        new DocumentsApi().getDocuments(member.memberId)
+          .then((response) => {
+            if (response.status !== 404) {
+              documents[member.memberId] = response.data;
+              this.setState({
+                documents: documents,
+              });
+            }
+          })
+          .catch(error => console.error(error));
+
+      });
     };
     getData();
+    //const getFiles = async (memberId) => {
+    //  const response = await new DocumentsApi().getDocuments(memberId);
+    //  const documents = this.state.documents;
+    //  documents[memberId] = response.data;
+    //  this.setState({
+    //    documents: documents,
+    //  });
+    //};
+    //this.state.data.map((member) => getFiles(member.id));
   }
 
   onSubmit(values) {
@@ -74,7 +100,7 @@ class MemberColumn extends Component {
                         expandable
                         collapsedText={
                           <>
-                            <h5>Documents</h5>
+                            <h5>Document</h5>
                             <ul>
                               <li>
                                 <ContentBetween>
@@ -95,25 +121,6 @@ class MemberColumn extends Component {
                                   </AlignMiddle>
                                 </ContentBetween>
                               </li>
-                              <li>
-                                <ContentBetween>
-                                  <div>
-                                    <FontAwesomeIcon
-                                      className="mr-1"
-                                      icon={faFileAlt}
-                                    />
-                                    <a href="#">
-                                      Thing.txt
-                                    </a>
-                                  </div>
-                                  <AlignMiddle>
-                                    <FontAwesomeIcon
-                                      className="mr-3"
-                                      icon={faTimes}
-                                    />
-                                  </AlignMiddle>
-                                </ContentBetween>
-                              </li>
                             </ul>
 
                             <Form className="my-2">
@@ -123,7 +130,7 @@ class MemberColumn extends Component {
                             </Form>
 
                             <Button className="w-100" variant="primary">
-                              Add files
+                              Add file
                             </Button>
                           </>
                         }
