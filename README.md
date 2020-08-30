@@ -8,9 +8,9 @@ A React+Bootstrap Web application which helps people manage their apartment. Spr
 
 ## Screenshots
 
-![Web Login and SignUp page](./screens/WebLoginAndSignUp.png)
-![Web Homepage](./screens/WebHomepage.png)
-![Mobile Homepage](./screens/MobileHomepage.png)
+![Web Login and SignUp page](./assets/screens/WebLoginAndSignUp.png)
+![Web Homepage](./assets/screens/WebHomepage.png)
+![Mobile Homepage](./assets/screens/MobileHomepage.png)
 
 ## Installing
 
