@@ -102,6 +102,7 @@ class SignIn extends React.Component {
               id="inputEmail"
               onChange={this.handleChange}
               value={this.state.email}
+              required
             />
           </div>
           <div className="form-group">
@@ -113,6 +114,7 @@ class SignIn extends React.Component {
               id="inputPassword"
               value={this.state.password}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
