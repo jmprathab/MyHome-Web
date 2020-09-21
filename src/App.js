@@ -14,6 +14,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import HousePage from "./pages/house/house.component";
 import UserPage from "./pages/users/users.component";
 import NavigationBar from "./components/navigation-bar/navigation-bar.component";
+import NotFoundPage from './pages/not-found/not-found.component';
 
 import { setCurrentUser } from "./redux/user/user.actions";
 
@@ -50,6 +51,7 @@ class App extends React.Component {
               <Route exact path="/community/:uuid" component={CommunityPage} />
               <Route exact path="/user/:uuid" component={UserPage} />
               <Route exact path="/house/:uuid" component={HousePage} />
+              <Route path="*" component={NotFoundPage} />
             </Switch>
           </BrowserRouter>
           {/* <CommunityList /> */}
