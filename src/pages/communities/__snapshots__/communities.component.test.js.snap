@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home Page should match snapshot test for home page component 1`] = `
+exports[`Communities Page should match snapshot test for home page component 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>

@@ -1,10 +1,10 @@
 import React from "react";
 import {render} from "@testing-library/react";
-import HomePage from "./homepage.component";
+import CommunitiesPage from "./communities.component";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
 
-describe('Home Page', () => {
+describe('Communities Page', () => {
 
     const mockStore = configureStore();
     const initialData = {
@@ -26,13 +26,13 @@ describe('Home Page', () => {
 
     it('should match snapshot test for home page component', () => {
         expect(render(<Provider store={storeWithNoUserData}>
-            <HomePage currentUser={initialData.user.currentUser}/>
+            <CommunitiesPage currentUser={initialData.user.currentUser}/>
         </Provider>)).toMatchSnapshot()
     });
 
     it('should render welcome message only if user is not having token', () => {
         const { queryByTestId } = render(<Provider store={storeWithNoUserData}>
-            <HomePage currentUser={initialData.user.currentUser}/>
+            <CommunitiesPage currentUser={initialData.user.currentUser}/>
         </Provider>);
 
         expect(queryByTestId('welcome-message')).toBeTruthy();
