@@ -1,21 +1,39 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Importing the Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import "./App.css";
+import styled from "styled-components";
+import styles from "./styles";
 
 import CommunityPage from "./pages/community/community.component";
 import CreateCommunityPage from "./pages/community/create-community.component";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/SignInAndSignUp";
 import HomePage from "./pages/homepage/homepage.component";
+import CommunitiesPage from "./pages/communities/communities.component";
 import HousePage from "./pages/house/house.component";
 import UserPage from "./pages/users/users.component";
-import NavigationBar from "./components/navigation-bar/navigation-bar.component";
+import NavigationBar from "./components/navigation-bar/NavigationBar";
+import Sidebar from "./components/sidebar/Sidebar";
 
 import { setCurrentUser } from "./redux/user/user.actions";
+import SignIn from "./pages/sign-in-and-sign-up/SignIn";
+import SignUp from "./pages/sign-in-and-sign-up/SignUp";
+
+const MainContainer = styled.div`
+  height: 100vh;
+`;
+const PageContainer = styled.div`
+  display: flex;
+  height: ${styles.variables.height};
+`;
+
+const Page = styled.div`
+  flex: 1 1 85%;
+  overflow-y: auto;
+`;
 
 class App extends React.Component {
   componentDidMount() {
@@ -40,20 +58,30 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <MainContainer>
           <NavigationBar />
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/signin" component={SignInAndSignUpPage} />
-              <Route exact path="/community/new" component={CreateCommunityPage} />
-              <Route exact path="/community/:uuid" component={CommunityPage} />
-              <Route exact path="/user/:uuid" component={UserPage} />
-              <Route exact path="/house/:uuid" component={HousePage} />
-            </Switch>
-          </BrowserRouter>
-          {/* <CommunityList /> */}
-        </div>
+          <PageContainer>
+            <Sidebar />
+            <Page>
+              <BrowserRouter>
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+
+                  <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                  <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                  <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+
+                  <Route exact path="/communities" component={CommunitiesPage} />
+                  <Route exact path="/community/new" component={CreateCommunityPage} />
+                  <Route exact path="/community/:uuid" component={CommunityPage} />
+
+                  <Route exact path="/user/:uuid" component={UserPage} />
+                  <Route exact path="/house/:uuid" component={HousePage} />
+                </Switch>
+              </BrowserRouter>
+            </Page>
+          </PageContainer>
+        </MainContainer>
       </div>
     );
   }
