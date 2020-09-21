@@ -13,6 +13,8 @@ class CommunityList extends Component {
 
     this.state = {
       communities: null,
+      filteredCommunities : [],
+      searchText: ''
     };
   }
 
@@ -26,12 +28,24 @@ class CommunityList extends Component {
     getCommunities();
   }
 
+  handleSearchText = (e) =>{
+    const searchText = e.target.value.trim().toLowerCase();
+    const filteredCommunities = [...this.state.communities].filter((c)=>c.name.toLowerCase().includes(searchText))      
+    this.setState({searchText : e.target.value, filteredCommunities})
+  }
+
   render() {
+
+    const renderCommunities = this.state.searchText ? this.state.filteredCommunities : this.state.communities;
+
     return (
       <Container>
+          <div className="input-group mt-4 mx-auto" style={{maxWidth: 360}}>
+            <input type="text" className="form-control"  placeholder="Search Communities.." value={this.state.searchText} onChange={this.handleSearchText}/>
+            </div>
         <PageRow>
           {this.state.communities ? (
-            this.state.communities.map((community) => {
+            renderCommunities.length ? renderCommunities.map((community) => {
               return <Column key={community.communityId} cols={3}>
                 <Card
                   title={community.name}
@@ -45,7 +59,7 @@ class CommunityList extends Component {
                   }
                 />
               </Column>
-            })
+            }) : <div className="mx-auto"><span style={{fontSize: 24}}>Community Not Found !!</span></div> 
           ) : ''}
         </PageRow>
       </Container>
