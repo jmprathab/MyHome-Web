@@ -31,10 +31,10 @@ class AdminColumn extends Component {
   }
 
   getData = async () => {
+    const modifiedData = [];
     const response = await new CommunityAdminsApi(this.props.communityId).getAdmins();
-    response.data.admins.map(v => v.adminId).forEach(async (id) => {
-      const userResponse = await new UsersApi().getUser(id);
-      const modifiedData = this.state.data;
+    response.data.admins.forEach(async (v) => {
+      const userResponse = await new UsersApi().getUser(v.adminId);
       modifiedData.push({
         id: userResponse.data.userId,
         name: userResponse.data.name,
