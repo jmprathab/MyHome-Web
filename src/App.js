@@ -17,6 +17,7 @@ import HousePage from "./pages/house/house.component";
 import UserPage from "./pages/users/users.component";
 import NavigationBar from "./components/navigation-bar/NavigationBar";
 import Sidebar from "./components/sidebar/Sidebar";
+import NotFoundPage from './pages/not-found/not-found.component';
 
 import { setCurrentUser } from "./redux/user/user.actions";
 import SignIn from "./pages/sign-in-and-sign-up/SignIn";
@@ -77,6 +78,8 @@ class App extends React.Component {
 
                   <Route exact path="/user/:uuid" component={UserPage} />
                   <Route exact path="/house/:uuid" component={HousePage} />
+
+                  <Route path="*" component={NotFoundPage} />
                 </Switch>
               </BrowserRouter>
             </Page>
