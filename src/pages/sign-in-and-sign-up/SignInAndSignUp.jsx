@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Container from "react-bootstrap/Container";
 
-import SignIn from "../../components/sign-in/sign-in.component";
-import SignUp from "../../components/sign-up/sign-up.component";
 import background from "../../assets/sign-in-and-sign-up/background.jpg";
 import styles from "../../styles";
 import Text from "../../components/common/Text";
@@ -58,24 +55,6 @@ class SignInAndSignUpPage extends Component {
       </PageFlexMod>
       {new Array(100).map(n => <p>{n}</p>)}
       </>
-    )
-  }
-}
-class thing extends Component {
-  render() {
-    return (
-      <div>
-      <Container>
-        <div className="row mt-5">
-          <div className="col-md-6">
-            <SignIn />
-          </div>
-          <div className="col-md-6">
-            <SignUp />
-          </div>
-        </div>
-      </Container>
-    </div>
     )
   }
 }
