@@ -80,7 +80,6 @@ class App extends React.Component {
   }
 
   onMenuToggle() {
-    console.log('Bla');
     const overlay = this.state.overlay;
     this.setState({
       overlay: !overlay,

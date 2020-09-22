@@ -42,7 +42,7 @@ const Bar = styled.div`
   left: -100%;
   display: initial;
   z-index: 2;
-  height: 100%;
+  height: ${styles.variables.viewHeight};
   background-color: ${styles.colors.white};
 
   @media screen and (max-width: 600px) {
