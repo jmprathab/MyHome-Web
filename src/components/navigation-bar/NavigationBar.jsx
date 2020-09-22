@@ -10,6 +10,7 @@ import Text from "../common/Text";
 import Avatar from "../common/Avatar";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { darken } from "polished";
+import { withRouter } from "react-router-dom";
 
 const doSignOut = () => {
   setCurrentUser(null);
@@ -81,7 +82,7 @@ const NavigationBar = ({ currentUser, setCurrentUser, onMenuToggle }) => {
           <Avatar src="https://http.cat/400" margin="0 10px" />
           <Text
             fontWeight="500"
-            dropdown={
+            dropdown={currentUser ?
               <>
                 <ItemList>
                   <Item onClick={doSignOut}>
@@ -89,7 +90,7 @@ const NavigationBar = ({ currentUser, setCurrentUser, onMenuToggle }) => {
                     <Text>Logout</Text>
                   </Item>
                 </ItemList>
-              </>
+              </> : false
             }
           >
             Tony Stark    
