@@ -22,6 +22,7 @@ import NotFoundPage from './pages/not-found/not-found.component';
 import { setCurrentUser } from "./redux/user/user.actions";
 import SignIn from "./pages/sign-in-and-sign-up/SignIn";
 import SignUp from "./pages/sign-in-and-sign-up/SignUp";
+import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider";
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -36,7 +37,28 @@ const Page = styled.div`
   overflow-y: auto;
 `;
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+`;
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onMenuToggle = this.onMenuToggle.bind(this);
+
+    this.state = {
+      overlay: false,
+    };
+  }
+
   componentDidMount() {
     // Get user details from localStorage and save to react store
     try {
@@ -56,13 +78,23 @@ class App extends React.Component {
       console.log("Cannot find info from localStorage");
     }
   }
+
+  onMenuToggle() {
+    console.log('Bla');
+    const overlay = this.state.overlay;
+    this.setState({
+      overlay: !overlay,
+    });
+  }
+
   render() {
     return (
       <div>
         <MainContainer>
-          <NavigationBar />
+          <NavigationBar onMenuToggle={this.onMenuToggle} />
           <PageContainer>
-            <Sidebar />
+            <Sidebar overlay={this.state.overlay} />
+            {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}
             <Page>
               <BrowserRouter>
                 <Switch>

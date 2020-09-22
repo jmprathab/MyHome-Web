@@ -8,15 +8,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import Text from "../common/Text";
 import Avatar from "../common/Avatar";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { darken } from "polished";
 
-const doSignOut = (setCurrentUser) => {
+const doSignOut = () => {
   setCurrentUser(null);
   localStorage.removeItem("userInfo");
 };
 
 const Navbar = styled.div`
+  z-index: 2;
   height: 50px;
   border-bottom: 2px solid ${styles.colors.grey};
   display: flex;
@@ -55,10 +56,22 @@ const Item = styled.li`
   }
 `;
 
-const NavigationBar = ({ currentUser, setCurrentUser }) => {
+const MenuIcon = styled(FontAwesomeIcon)`
+  display: none;
+  margin-right: 10px;
+  
+  @media screen and (max-width: 600px) {
+    display: initial;
+  }
+`;
+
+const NavigationBar = ({ currentUser, setCurrentUser, onMenuToggle }) => {
   return (
     <Navbar>
-      <Text>MyHome logo</Text>
+      <div>
+        <MenuIcon icon={faBars} onClick={onMenuToggle} />
+        <Text>MyHome logo</Text>
+      </div>
       <div>
         <span className="fa-layers fa-fw">
           <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
@@ -68,20 +81,18 @@ const NavigationBar = ({ currentUser, setCurrentUser }) => {
           <Avatar src="https://http.cat/400" margin="0 10px" />
           <Text
             fontWeight="500"
-            dropdown={/*
-              <ItemList>
-                <Item>
-                  <FontAwesomeIcon icon={faSignOutAlt} />
-                  <Text>Logout</Text>
-                </Item>
-                <Item>
-                  <FontAwesomeIcon
-                </Item>
-              </ItemList>*/
-              <></>
+            dropdown={
+              <>
+                <ItemList>
+                  <Item onClick={doSignOut}>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <Text>Logout</Text>
+                  </Item>
+                </ItemList>
+              </>
             }
           >
-            Tony Stark
+            Tony Stark    
           </Text>
         </span>
       </div>

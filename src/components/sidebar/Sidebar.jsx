@@ -39,8 +39,19 @@ const Bar = styled.div`
   padding: 20px 10px 20px 0;
   border-right: 3px solid ${styles.colors.grey};
 
+  left: -100%;
+  display: initial;
+  z-index: 2;
+  height: 100%;
+  background-color: ${styles.colors.white};
+
   @media screen and (max-width: 600px) {
-    display: none;
+    position: absolute;
+    transition: left .5s;
+
+    ${props => props.overlay && css`
+      left: 0;
+    `}
   }
 `;
 
@@ -88,24 +99,26 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <Bar>
-        <LinkList>
-          {this.getLinks().map(link => {
-            let LinkComponent = Link;
-            if (link.normal) {
-              LinkComponent = NormalLink;
-            }
-            return <li>
-              <LinkComponent exact={true} activeClassName="active" to={link.link} href={link.normal ? link.link : false}>
-                <Icon icon={link.icon} />
-                <Text fontWeight="500" color="currentColor">
-                  {link.text}
-                </Text>
-              </LinkComponent>
-            </li>
-          })}
-        </LinkList>
-      </Bar>
+      <>
+        <Bar overlay={this.props.overlay}>
+          <LinkList>
+            {this.getLinks().map(link => {
+              let LinkComponent = Link;
+              if (link.normal) {
+                LinkComponent = NormalLink;
+              }
+              return <li>
+                <LinkComponent exact={true} activeClassName="active" to={link.link} href={link.normal ? link.link : false}>
+                  <Icon icon={link.icon} />
+                  <Text fontWeight="500" color="currentColor">
+                    {link.text}
+                  </Text>
+                </LinkComponent>
+              </li>
+            })}
+          </LinkList>
+        </Bar>
+      </>
     )
   }
 }

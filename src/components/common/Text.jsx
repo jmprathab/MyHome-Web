@@ -39,9 +39,6 @@ const CSS = css`
     &[data-dropdownOpen = "true"] .dropdownContent {
       display: block;
     }
-    ${props => props.pressed && css`
-      display: font-bla;
-    `}
   `}
 `;
 
@@ -53,7 +50,7 @@ const DropdownIcon = styled(FontAwesomeIcon)`
   margin-left: 5px;
 
   path {
-    transition: d 1s;
+    transition: d .5s;
   }
 `;
 
