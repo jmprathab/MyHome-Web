@@ -5,6 +5,7 @@ import InputBox from "./InputBox";
 import Text from "../../components/common/Text";
 import Link from "../../components/links/Link";
 import Input from "../../components/common/Input";
+import AccountsApi from "../../api/Accounts";
 
 class SignUp extends Component {
   constructor(props) {
@@ -77,6 +78,10 @@ class SignUp extends Component {
     this.validate();
     
     if (Object.values(this.state.errors).every(error => error === false)) {
+      const signUp = async () => {
+        await new AccountsApi().createUser(this.state.name, this.state.email, this.state.password);
+      };
+      signUp();
       this.props.history.push('/login');
     }
   }

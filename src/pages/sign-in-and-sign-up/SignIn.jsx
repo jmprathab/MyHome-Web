@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 
-import Button from "../../components/common/Button";
 import Text from "../../components/common/Text";
 import Link from "../../components/links/Link";
-import styles from "../../styles";
 import Input from "../../components/common/Input";
 import InputBox from "./InputBox";
 import { withRouter } from "react-router-dom";
+import AccountsApi from "../../api/Accounts";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 
 
@@ -72,6 +71,34 @@ class SignIn extends Component {
     this.validate();
 
     if (Object.values(this.state.errors).every(error => error === false)) {
+      const signIn = async () => {
+        const responsePromise = new AccountsApi().loginUser(this.state.email, this.state.password)
+        responsePromise
+          .then((res) => {
+            console.log(res);
+            return {
+              userId: res.headers.userid,
+              userToken: res.headers.token,
+            };
+          })
+          .then(({ userId, userToken }) => {
+            console.log(userId);
+            console.log(userToken);
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({
+                userId: userId,
+                token: userToken,
+              })
+            );
+        
+            setCurrentUser({
+              userId: userId,
+              token: userToken,
+            });
+          }).catch(error => console.error(error));
+      };
+      signIn();
       this.props.history.push('/');
     }
   }
