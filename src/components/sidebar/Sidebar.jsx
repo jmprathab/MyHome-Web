@@ -9,13 +9,14 @@ import styles from "../../styles";
 import Text from "../common/Text";
 
 const CSS = css`
-  padding: 10px 0 10px 20px;
+  padding: 10px 10px 10px 20px;
   margin-right: 30px;
   display: flex;
   align-items: center;
   color: ${styles.colors.black};
 
   &.active {
+    margin-right: 27px;
     border-left: 3px solid ${styles.colors.blue};
     color: ${styles.colors.blue};
     background-color: ${lighten(0.45, styles.colors.blue)};
@@ -84,6 +85,7 @@ class Sidebar extends Component {
         text: 'Settings',
       },
       {
+        normal: true,
         link: 'https://example.org',
         icon: faQuestion,
         text: 'Help',
@@ -108,7 +110,7 @@ class Sidebar extends Component {
                 LinkComponent = NormalLink;
               }
               return <li>
-                <LinkComponent exact={true} activeClassName="active" to={link.link} href={link.normal ? link.link : false}>
+                <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
                   <Icon icon={link.icon} />
                   <Text fontWeight="500" color="currentColor">
                     {link.text}
