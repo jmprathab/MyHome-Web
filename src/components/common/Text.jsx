@@ -73,13 +73,16 @@ class Text extends Component {
   }
 
   render() {
-    let Selected = Span;
+    let Selected;
     switch (this.props.type) {
       case 'paragraph':
         Selected = Paragraph;
         break;
       case 'header':
         Selected = Header;
+        break;
+      default:
+        Selected = Span;
         break;
     }
     return (

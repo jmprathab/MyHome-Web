@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Importing the Bootstrap CSS
@@ -22,7 +22,6 @@ import NotFoundPage from './pages/not-found/not-found.component';
 import { setCurrentUser } from "./redux/user/user.actions";
 import SignIn from "./pages/sign-in-and-sign-up/SignIn";
 import SignUp from "./pages/sign-in-and-sign-up/SignUp";
-import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider";
 
 const MainContainer = styled.div`
   height: 100vh;
