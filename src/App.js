@@ -95,24 +95,22 @@ class App extends React.Component {
             <Sidebar overlay={this.state.overlay} />
             {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}
             <Page>
-              <BrowserRouter>
-                <Switch>
-                  <Route exact path="/" component={HomePage} />
+              <Switch>
+                <Route exact path="/" component={HomePage} />
 
-                  <Route exact path="/signin" component={() => <Redirect to="/login" />} />
-                  <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
-                  <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+                <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
 
-                  <Route exact path="/communities" component={CommunitiesPage} />
-                  <Route exact path="/community/new" component={CreateCommunityPage} />
-                  <Route exact path="/community/:uuid" component={CommunityPage} />
+                <Route exact path="/communities" component={CommunitiesPage} />
+                <Route exact path="/community/new" component={CreateCommunityPage} />
+                <Route exact path="/community/:uuid" component={CommunityPage} />
 
-                  <Route exact path="/user/:uuid" component={UserPage} />
-                  <Route exact path="/house/:uuid" component={HousePage} />
+                <Route exact path="/user/:uuid" component={UserPage} />
+                <Route exact path="/house/:uuid" component={HousePage} />
 
-                  <Route path="*" component={NotFoundPage} />
-                </Switch>
-              </BrowserRouter>
+                <Route path="*" component={NotFoundPage} />
+              </Switch>
             </Page>
           </PageContainer>
         </MainContainer>
