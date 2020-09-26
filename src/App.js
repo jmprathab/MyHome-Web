@@ -22,6 +22,7 @@ import NotFoundPage from './pages/not-found/not-found.component';
 import { setCurrentUser } from "./redux/user/user.actions";
 import SignIn from "./pages/sign-in-and-sign-up/SignIn";
 import SignUp from "./pages/sign-in-and-sign-up/SignUp";
+import { CSSTransition, TransitionGroup as ReactTransitionGroup } from "react-transition-group";
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -45,6 +46,26 @@ const Overlay = styled.div`
   z-index: 1;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
+`;
+
+const TransitionGroup = styled(ReactTransitionGroup)`
+  height: ${styles.variables.height};
+`;
+const Transition = styled(CSSTransition)`
+  height: ${styles.variables.height};
+
+  &.page-fade-enter {
+    opacity: 0.01;
+  }
+
+  &.page-fade-enter.page-fade-enter-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
+  }
+
+  &.page-fade-exit {
+      display: none;
+  }
 `;
 
 class App extends React.Component {
@@ -94,22 +115,34 @@ class App extends React.Component {
             <Sidebar overlay={this.state.overlay} />
             {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}
             <Page>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
+              <Route render={({ location }) => {
+                return <TransitionGroup>
+                  <Transition
+                    key={location.key}
+                    timeout={300}
+                    classNames="page-fade"
+                  >
+                    <div>
+                      <Switch location={location}>
+                        <Route exact path="/" component={HomePage} />
 
-                <Route exact path="/signin" component={() => <Redirect to="/login" />} />
-                <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
-                <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+                        <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                        <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                        <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
 
-                <Route exact path="/communities" component={CommunitiesPage} />
-                <Route exact path="/community/new" component={CreateCommunityPage} />
-                <Route exact path="/community/:uuid" component={CommunityPage} />
+                        <Route exact path="/communities" component={CommunitiesPage} />
+                        <Route exact path="/community/new" component={CreateCommunityPage} />
+                        <Route exact path="/community/:uuid" component={CommunityPage} />
 
-                <Route exact path="/user/:uuid" component={UserPage} />
-                <Route exact path="/house/:uuid" component={HousePage} />
+                        <Route exact path="/user/:uuid" component={UserPage} />
+                        <Route exact path="/house/:uuid" component={HousePage} />
 
-                <Route path="*" component={NotFoundPage} />
-              </Switch>
+                        <Route path="*" component={NotFoundPage} />
+                      </Switch>
+                    </div>
+                  </Transition>
+                </TransitionGroup>
+              }} />
             </Page>
           </PageContainer>
         </MainContainer>
