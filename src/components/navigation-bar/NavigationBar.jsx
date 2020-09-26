@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import styles from "../../styles";
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import Text from "../common/Text";
 import Avatar from "../common/Avatar";
-import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignOutAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { darken } from "polished";
 
 const doSignOut = () => {
@@ -59,46 +59,73 @@ const Item = styled.li`
 const MenuIcon = styled(FontAwesomeIcon)`
   display: none;
   margin-right: 10px;
+  cursor: pointer;
+
+  path {
+    transition: d .5s;
+  }
   
   @media screen and (max-width: 600px) {
     display: initial;
   }
 `;
 
-const NavigationBar = ({ currentUser, setCurrentUser, onMenuToggle }) => {
-  return (
-    <Navbar>
-      <div>
-        <MenuIcon icon={faBars} onClick={onMenuToggle} />
-        <Text>MyHome logo</Text>
-      </div>
-      <div>
-        <span className="fa-layers fa-fw">
-          <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
-          <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
-        </span>
-        <span>
-          <Avatar src="https://http.cat/400" margin="0 10px" />
-          <Text
-            fontWeight="500"
-            dropdown={currentUser ?
-              <>
-                <ItemList>
-                  <Item onClick={doSignOut}>
-                    <FontAwesomeIcon icon={faSignOutAlt} />
-                    <Text>Logout</Text>
-                  </Item>
-                </ItemList>
-              </> : false
-            }
-          >
-            Tony Stark
-          </Text>
-        </span>
-      </div>
-    </Navbar>
-  )
-};
+class NavigationBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onMenuToggle = this.onMenuToggle.bind(this);
+    
+    this.state = {
+      toggled: false,
+    };
+  }
+
+  onMenuToggle() {
+    console.log(this.state);
+
+    const toggled = this.state.toggled;
+    this.setState({
+      toggled: !toggled,
+    });
+    this.props.onMenuToggle();
+  }
+
+  render() {
+    return (
+      <Navbar>
+        <div>
+          <MenuIcon icon={this.state.toggled ? faTimes : faBars} onClick={this.onMenuToggle} />
+          <Text>MyHome logo</Text>
+        </div>
+        <div>
+          <span className="fa-layers fa-fw">
+            <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
+            <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
+          </span>
+          <span>
+            <Avatar src="https://http.cat/400" margin="0 10px" />
+            <Text
+              fontWeight="500"
+              dropdown={this.props.currentUser ?
+                <>
+                  <ItemList>
+                    <Item onClick={doSignOut}>
+                      <FontAwesomeIcon icon={faSignOutAlt} />
+                      <Text>Logout</Text>
+                    </Item>
+                  </ItemList>
+                </> : false
+              }
+            >
+              Tony Stark
+            </Text>
+          </span>
+        </div>
+      </Navbar>
+    )
+  }
+}
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
