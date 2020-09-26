@@ -48,6 +48,7 @@ const Header = styled.h1`${CSS}`;
 
 const DropdownIcon = styled(FontAwesomeIcon)`
   margin-left: 5px;
+  cursor: pointer;
 
   path {
     transition: d .5s;
