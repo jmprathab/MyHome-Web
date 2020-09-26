@@ -11,7 +11,7 @@ import styles from "./styles";
 import CommunityPage from "./pages/community/community.component";
 import CreateCommunityPage from "./pages/community/create-community.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/SignInAndSignUp";
-import HomePage from "./pages/homepage/homepage.component";
+import HomePage from "./pages/homepage/Homepage";
 import CommunitiesPage from "./pages/communities/communities.component";
 import HousePage from "./pages/house/house.component";
 import UserPage from "./pages/users/users.component";
@@ -49,10 +49,10 @@ const Overlay = styled.div`
 `;
 
 const TransitionGroup = styled(ReactTransitionGroup)`
-  height: ${styles.variables.height};
+  height: 100%;
 `;
 const Transition = styled(CSSTransition)`
-  height: ${styles.variables.height};
+  height: 100%;
 
   &.page-fade-enter {
     opacity: 0.01;
