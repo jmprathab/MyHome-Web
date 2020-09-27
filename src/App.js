@@ -53,6 +53,7 @@ const TransitionGroup = styled(ReactTransitionGroup)`
 `;
 const Transition = styled(CSSTransition)`
   height: 100%;
+  overflow-y: auto;
 
   &.page-fade-enter {
     opacity: 0.01;
