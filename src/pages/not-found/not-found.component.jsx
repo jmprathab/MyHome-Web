@@ -7,7 +7,7 @@ const NotFoundPage = ({ history }) => (
   <div className="container text-center">
     <p className="h5 mt-5">
       <br />
-      <Text fontSize="2.5rem"></Text>
+      <Text fontSize="2.5rem">Oops! Page Not Found</Text>
       <br />
       The page you are looking for might be removed or temporarily unavailable.
     </p>
