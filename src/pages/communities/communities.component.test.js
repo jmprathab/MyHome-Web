@@ -40,7 +40,7 @@ describe('Communities Page', () => {
 
     it('should not render welcome message if user is having token', () => {
         const { queryByTestId } = render(<Provider store={storeWithUserData}>
-            <HomePage currentUser={loggedInUserData.user.currentUser} />
+            <CommunitiesPage currentUser={loggedInUserData.user.currentUser} />
         </Provider>)
 
         expect(queryByTestId('welcome-message')).toBeFalsy();
