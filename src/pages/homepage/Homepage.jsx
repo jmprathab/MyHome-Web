@@ -44,6 +44,7 @@ const ButtonLink = styled.a`
   text-decoration: none;
 
   padding: 15px 40px;
+  margin: 20px 0;
 
   &:hover {
     background-color: ${darken(0.05, styles.variables.white)};
