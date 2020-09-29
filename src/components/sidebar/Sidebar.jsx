@@ -104,12 +104,12 @@ class Sidebar extends Component {
       <>
         <Bar overlay={this.props.overlay}>
           <LinkList>
-            {this.getLinks().map(link => {
+            {this.getLinks().map((link, index) => {
               let LinkComponent = Link;
               if (link.normal) {
                 LinkComponent = NormalLink;
               }
-              return <li>
+              return <li key={index}>
                 <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
                   <Icon icon={link.icon} />
                   <Text fontWeight="500" color="currentColor">
