@@ -54,7 +54,7 @@ class SignUp extends Component {
         errors[id] = 'Password needs to have between x and y characters';
       }
   
-      if (id === 'email' && !value.match(/^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/)) {
+      if (id === 'email' && !value.match(/^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/)) {
         errors[id] = 'Email adress is not valid';
       }
     }
