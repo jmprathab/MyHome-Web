@@ -8,13 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import Text from "../common/Text";
 import Avatar from "../common/Avatar";
-import { faBars, faSignOutAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignInAlt, faSignOutAlt, faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { darken } from "polished";
-
-const doSignOut = () => {
-  setCurrentUser(null);
-  localStorage.removeItem("userInfo");
-};
+import { withRouter } from "react-router-dom";
 
 const Navbar = styled.div`
   z-index: 2;
@@ -74,28 +70,30 @@ class NavigationBar extends Component {
   constructor(props) {
     super(props);
 
-    this.onMenuToggle = this.onMenuToggle.bind(this);
-    
-    this.state = {
-      toggled: false,
-    };
+    this.goToSignUp = this.goToSignUp.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
+
+    this.doSignOut = this.doSignOut.bind(this);
   }
 
-  onMenuToggle() {
-    console.log(this.state);
+  goToSignUp() {
+    this.props.history.push('/signup');
+  }
 
-    const toggled = this.state.toggled;
-    this.setState({
-      toggled: !toggled,
-    });
-    this.props.onMenuToggle();
+  goToLogin() {
+    this.props.history.push('/login');
+  }
+
+  doSignOut() {
+    this.props.setCurrentUser(null);
+    localStorage.removeItem('userInfo');
   }
 
   render() {
     return (
       <Navbar>
         <div>
-          <MenuIcon icon={this.state.toggled ? faTimes : faBars} onClick={this.onMenuToggle} />
+          <MenuIcon icon={this.props.menuToggled ? faTimes : faBars} onClick={this.props.onMenuToggle} />
           <Text>MyHome logo</Text>
         </div>
         <div>
@@ -107,18 +105,30 @@ class NavigationBar extends Component {
             <Avatar src="https://http.cat/400" margin="0 10px" />
             <Text
               fontWeight="500"
-              dropdown={this.props.currentUser ?
-                <>
-                  <ItemList>
-                    <Item onClick={doSignOut}>
+              dropdownMargin="0 0 0 -30px"
+              dropdown={
+                <ItemList>
+                  {this.props.currentUser ?
+                    <Item onClick={this.doSignOut}>
                       <FontAwesomeIcon icon={faSignOutAlt} />
-                      <Text>Logout</Text>
+                      <Text padding="0 0 0 5px">Logout</Text>
                     </Item>
-                  </ItemList>
-                </> : false
+                  :
+                    <>
+                      <Item onClick={this.goToSignUp}>
+                        <FontAwesomeIcon icon={faUserPlus} />
+                        <Text padding="0 0 0 5px">Sign Up</Text>
+                      </Item>
+                      <Item onClick={this.goToLogin}>
+                        <FontAwesomeIcon icon={faSignInAlt} />
+                        <Text padding="0 0 0 5px">Login</Text>
+                      </Item>
+                    </>
+                  }
+                </ItemList>
               }
             >
-              Tony Stark
+              {this.props.currentUser ? 'Tony Stark' : 'Guest'}
             </Text>
           </span>
         </div>
@@ -134,4 +144,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationBar));

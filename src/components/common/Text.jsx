@@ -36,7 +36,7 @@ const CSS = css`
       position: absolute;
     }
 
-    &[data-dropdownOpen = "true"] .dropdownContent {
+    &[data-dropdownopen = "true"] .dropdownContent {
       display: block;
     }
   `}
@@ -53,6 +53,11 @@ const DropdownIcon = styled(FontAwesomeIcon)`
   path {
     transition: d .5s;
   }
+`;
+const DropdownContent = styled.div`
+  ${props => props.dropdownMargin && css`
+    margin: ${props.dropdownMargin};
+  `}
 `;
 
 class Text extends Component {
@@ -87,11 +92,13 @@ class Text extends Component {
         break;
     }
     return (
-      <Selected {...this.props} data-dropdownOpen={JSON.stringify(this.state.dropdownOpen)}>
+      <Selected {...this.props} data-dropdownopen={JSON.stringify(this.state.dropdownOpen)}>
         {this.props.children}
         {this.props.dropdown && <>
           <DropdownIcon icon={this.state.dropdownOpen ? faChevronDown : faChevronRight} size="sm" onClick={this.toogleDropdown} />
-          <div className="dropdownContent">{this.props.dropdown}</div>
+          <DropdownContent {...this.props} className="dropdownContent">
+            {this.props.dropdown}
+          </DropdownContent>
         </>}
       </Selected>
     )

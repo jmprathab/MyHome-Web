@@ -111,7 +111,7 @@ class App extends React.Component {
     return (
       <div>
         <MainContainer>
-          <NavigationBar onMenuToggle={this.onMenuToggle} />
+          <NavigationBar onMenuToggle={this.onMenuToggle} menuToggled={this.state.overlay} />
           <PageContainer>
             <Sidebar overlay={this.state.overlay} />
             {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}

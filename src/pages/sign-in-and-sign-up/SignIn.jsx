@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Text from "../../components/common/Text";
 import Link from "../../components/links/Link";
@@ -7,8 +8,6 @@ import InputBox from "./InputBox";
 import { withRouter } from "react-router-dom";
 import AccountsApi from "../../api/Accounts";
 import { setCurrentUser } from "../../redux/user/user.actions";
-
-
 
 class SignIn extends Component {
   constructor(props) {
@@ -92,7 +91,7 @@ class SignIn extends Component {
               })
             );
         
-            setCurrentUser({
+            this.props.setCurrentUser({
               userId: userId,
               token: userToken,
             });
@@ -151,4 +150,8 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(SignIn);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(SignIn));
