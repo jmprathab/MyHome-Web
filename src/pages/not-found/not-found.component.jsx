@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
+import Text from "../../components/common/Text";
+
 const NotFoundPage = ({ history }) => (
   <div className="container text-center">
     <p className="h5 mt-5">
       <br />
-      <h1>Oops! Page Not Found</h1>
+      <Text fontSize="2.5rem">Oops! Page Not Found</Text>
       <br />
       The page you are looking for might be removed or temporarily unavailable.
     </p>
