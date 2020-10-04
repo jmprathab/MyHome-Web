@@ -37,11 +37,11 @@ Made with [contributors-img](https://contributors-img.firebaseapp.com)
 
 Feel free to contribute to the project. Please make sure to follow the below list before contributing.
 
-- Read `CONTRIBUTING.md`
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
 
 ## License
 
-This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
