@@ -45,7 +45,9 @@ const Bar = styled.div`
   z-index: 2;
   height: ${styles.variables.viewHeight};
   background-color: ${styles.colors.white};
-
+  @media screen and (max-width: 200px) {
+   display:none
+  }
   @media screen and (max-width: 600px) {
     position: absolute;
     transition: left .5s;
