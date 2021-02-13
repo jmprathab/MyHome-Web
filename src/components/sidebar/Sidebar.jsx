@@ -47,7 +47,6 @@ const Bar = styled.div`
 
   @media screen and (max-width: 600px) {
     position: absolute;
-    transition: left .5s;
     display: none;
 
     ${props => props.overlay && css`
