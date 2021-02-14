@@ -102,7 +102,7 @@ class NavigationBar extends Component {
             <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
           </span>
           <span>
-            <Avatar src="https://http.cat/400" margin="0 10px" />
+            <Avatar src="https://http.cat/400" margin="0 10px" width="25px" height="25px" />
             <Text
               fontWeight="500"
               dropdownMargin="0 0 0 -30px"
