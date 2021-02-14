@@ -21,6 +21,10 @@ const CSS = css`
     color: ${styles.colors.blue};
     background-color: ${lighten(0.45, styles.colors.blue)};
   }
+
+  &:not(.active) {
+    margin-left: 3pxs
+  }
 `;
 
 const Link = styled(NavLink)`${CSS}`;
