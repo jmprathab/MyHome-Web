@@ -23,7 +23,7 @@ const CSS = css`
   }
 
   &:not(.active) {
-    margin-left: 3pxs
+    margin-left: 3px
   }
 `;
 
