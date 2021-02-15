@@ -140,7 +140,7 @@ class SignUp extends Component {
         }
         footer={
           <Text type="paragraph" textAlign="center">
-            Already have an account? <Link to="/signup">Log In</Link>
+            Already have an account? <Link to="/login">Log In</Link>
           </Text>
         }
       />
