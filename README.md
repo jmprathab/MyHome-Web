@@ -49,3 +49,11 @@ This project relies on the following projects
 
 - Reactjs
 - Bootstrap
+
+
+## Generating frontend client for OpenAPI specs
+1. Run `npm run generator-install` 
+   Needs to be done once (it installs openapi-generator-cli globally)
+2. Run `npm run generator-generate`
+   This command runs `openapi-generator-cli` using config located under `src/client/javascript_generator_config.json` and actual `api.yaml` definition located under [this location](https://raw.githubusercontent.com/jmprathab/MyHome/master/api/src/main/resources/public/swagger/api.yaml).
+3. You should see the generated code under `src/client` directory.
