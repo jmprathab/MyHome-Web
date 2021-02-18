@@ -1,4 +1,5 @@
 {
   "apiPackage": "api",
-  "modelPackage": "model"
+  "modelPackage": "model",
+  "usePromises": "true"
 }
