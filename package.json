@@ -27,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generator-install" : "npm i -g @openapitools/openapi-generator-cli",
+    "generator-generate" : "openapi-generator-cli generate -g javascript -i https://raw.githubusercontent.com/jmprathab/MyHome/master/api/src/main/resources/public/swagger/api.yaml -o src/client -c src/client/javascript_generator_config.json"
   },
   "eslintConfig": {
     "extends": "react-app"
