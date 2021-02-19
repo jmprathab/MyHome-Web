@@ -16,7 +16,7 @@ export default class AccountsApi {
     console.debug(
       `Login user api called with email[${email}], password[${password}]`
     );
-    return axiosInstance.post(`/users/login`, {
+    return axiosInstance.post(`/auth/login`, {
       email: email,
       password: password,
     });
