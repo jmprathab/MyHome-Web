@@ -1,0 +1,5 @@
+{
+  "apiPackage": "api",
+  "modelPackage": "model",
+  "usePromises": "true"
+}
