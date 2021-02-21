@@ -44,7 +44,6 @@ const Bar = styled.div`
   padding: 20px 10px 20px 0;
   border-right: 3px solid ${styles.colors.grey};
 
-  left: -100%;
   display: initial;
   z-index: 2;
   height: ${styles.variables.viewHeight};
@@ -52,10 +51,10 @@ const Bar = styled.div`
 
   @media screen and (max-width: 600px) {
     position: absolute;
-    transition: left .5s;
+    display: none;
 
     ${props => props.overlay && css`
-      left: 0;
+      display: initial;
     `}
   }
 `;
