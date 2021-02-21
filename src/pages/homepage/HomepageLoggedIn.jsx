@@ -121,7 +121,7 @@ const Spacer = styled.div`
 `;
 
 
-function HomepageNew(props) {
+function HomepageLoggedIn(props) {
   const usersApi = new UsersApi();
   const paymentsApi = new PaymentsApi();
   const amenitiesApi = new AmenitiesApi();
@@ -405,4 +405,4 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-export default connect(mapStateToProps)(HomepageNew);
+export default connect(mapStateToProps)(HomepageLoggedIn);
