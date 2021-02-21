@@ -132,11 +132,13 @@ function HomepageLoggedIn(props) {
       setHouseMembers(response.data.members);
     };
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [communities, setCommunities] = useState([]);
   useEffect(() => {
     getCommunities();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getCommunities = async () => {
     const response = await usersApi.getUser(props.currentUser.userId);
