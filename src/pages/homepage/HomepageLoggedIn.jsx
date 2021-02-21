@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import styled, { css } from "styled-components";
 import { darken } from "polished";
@@ -126,26 +126,20 @@ function HomepageLoggedIn(props) {
   const paymentsApi = new PaymentsApi();
   const amenitiesApi = new AmenitiesApi();
   const [houseMembers, setHouseMembers] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      const response = await usersApi.getHouseMembers(props.currentUser.userId, 0, 4);
-      setHouseMembers(response.data.members);
-    };
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const getData = async () => {
+    const response = await usersApi.getHouseMembers(props.currentUser.userId, 0, 4);
+    setHouseMembers(response.data.members);
+  };
+  getData();
 
   const [communities, setCommunities] = useState([]);
-  useEffect(() => {
-    getCommunities();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const getCommunities = async () => {
     const response = await usersApi.getUser(props.currentUser.userId);
     setCommunities(response.data.communityIds);
     getAmenities(response.data.communityIds);
     getPaymentsNew(response.data.communityIds, 0);
   };
+  getCommunities();
 
   const [currentPage, setCurrentPage] = useState(0);
   const [payments, setPayments] = useState();
