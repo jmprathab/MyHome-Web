@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled, { css } from "styled-components";
 import { darken } from "polished";
@@ -125,8 +125,8 @@ function HomepageLoggedIn(props) {
   const usersApi = new UsersApi();
   const paymentsApi = new PaymentsApi();
   const amenitiesApi = new AmenitiesApi();
-  const [houseMembers, setHouseMembers] = React.useState([]);
-  React.useEffect(() => {
+  const [houseMembers, setHouseMembers] = useState([]);
+  useEffect(() => {
     const getData = async () => {
       const response = await usersApi.getHouseMembers(props.currentUser.userId, 0, 4);
       setHouseMembers(response.data.members);
@@ -135,7 +135,7 @@ function HomepageLoggedIn(props) {
   }, []);
 
   const [communities, setCommunities] = useState([]);
-  React.useEffect(() => {
+  useEffect(() => {
     getCommunities();
   }, []);
   const getCommunities = async () => {
