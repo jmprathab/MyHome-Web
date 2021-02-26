@@ -122,57 +122,54 @@ const Spacer = styled.div`
 
 
 function HomepageLoggedIn(props) {
-  const usersApi = new UsersApi();
-  const paymentsApi = new PaymentsApi();
-  const amenitiesApi = new AmenitiesApi();
   const [houseMembers, setHouseMembers] = useState([]);
-  const getHouseMembers = async () => {
-    const response = await usersApi.getHouseMembers(props.currentUser.userId, 0, 4);
+  const getHouseMembers = useCallback(async () => {
+    const response = await new UsersApi().getHouseMembers(props.currentUser.userId, 0, 4);
     setHouseMembers(response.data.members);
-  };
-  const getHouseMembersCallback = useCallback(getHouseMembers);
+  }, [props.currentUser]);
   useEffect(() => {
-    getHouseMembersCallback();
-  }, [getHouseMembersCallback]);
+    getHouseMembers();
+  }, [getHouseMembers]);
 
   const [communities, setCommunities] = useState([]);
-  const getCommunities = async () => {
-    const response = await usersApi.getUser(props.currentUser.userId);
-    setCommunities(response.data.communityIds);
-    getAmenities(response.data.communityIds);
-    getPaymentsNew(response.data.communityIds, 0);
-  };
-  const getCommunitiesCallback = useCallback(getCommunities);
-  useEffect(() => {
-    getCommunitiesCallback();
-  }, [getCommunitiesCallback]);
-
 
   const [currentPage, setCurrentPage] = useState(0);
   const [payments, setPayments] = useState();
   const [date, setDate] = useState([new Date(), new Date()]);
   const [selectedOption, setSelectedOption] = useState('weeks');
 
-  const getPaymentsNew = async (ids, page) => {
+  const getPayments = useCallback(async (ids, page) => {
     for (let i = 0; i < ids.length; i++) {
-      const response = await paymentsApi.getCommunityAdminPayments(ids[i], props.currentUser.userId, page, 4);
+      const response = await new PaymentsApi().getCommunityAdminPayments(ids[i], props.currentUser.userId, page, 4);
       setPayments(response.data);
     }
-  };
+  }, [props.currentUser]);
   const recalculate = function (page) {
     setCurrentPage(page);
-    getPaymentsNew(communities, page);
+    getPayments(communities, page);
   }
 
   const [amenities, setAmenities] = useState([]);
-  const getAmenities = async (ids) => {
+
+  const getAmenities = useCallback(async (ids) => {
     const newAmenities = [];
     for (let i = 0; i < ids.length; i++) {
-      const response = await amenitiesApi.getAmenitiesForCommunityId(ids[i]);
+      const response = await new AmenitiesApi().getAmenitiesForCommunityId(ids[i]);
       response.data.forEach(amenity => newAmenities.push(amenity));
     }
     setAmenities(newAmenities);
-  };
+  }, []);
+
+  const getCommunities = useCallback(async () => {
+    const response = await new UsersApi().getUser(props.currentUser.userId);
+    setCommunities(response.data.communityIds);
+    getAmenities(response.data.communityIds);
+    getPayments(response.data.communityIds, 0);
+  }, [getAmenities, getPayments, props.currentUser]);
+
+  useEffect(() => {
+    getCommunities();
+  }, [getCommunities]);
   
   return (
     <OuterContainer>
@@ -186,7 +183,6 @@ function HomepageLoggedIn(props) {
               </Text>
             }
             footer={
-              /* TODO: Consider updating the link below */
               <Link
                 to="/housemembers"
 
