@@ -23,6 +23,7 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import SignIn from "./pages/sign-in-and-sign-up/SignIn";
 import SignUp from "./pages/sign-in-and-sign-up/SignUp";
 import { CSSTransition, TransitionGroup as ReactTransitionGroup } from "react-transition-group";
+import HomepageLoggedIn from "./pages/homepage/HomepageLoggedIn";
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -73,6 +74,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.loadUserInfo();
+
     this.onMenuToggle = this.onMenuToggle.bind(this);
 
     this.state = {
@@ -80,7 +83,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  loadUserInfo() {
     // Get user details from localStorage and save to react store
     try {
       var info = localStorage.getItem("userInfo");
@@ -125,7 +128,7 @@ class App extends React.Component {
                   >
                     <div>
                       <Switch location={location}>
-                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/" component={this.props.currentUser ? HomepageLoggedIn : HomePage} />
 
                         <Route exact path="/signin" component={() => <Redirect to="/login" />} />
                         <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
@@ -155,4 +158,7 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

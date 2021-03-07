@@ -1,11 +1,14 @@
 import styled, { css } from "styled-components";
 
-export default styled.img`
+export default styled.img.attrs(props => ({
+  height: props.height || '45px',
+  width: props.width || '45px',
+}))`
   ${props => props.margin && css`
     margin: ${props.margin};
   `}
 
   border-radius: 50%;
-  height: 25px;
-  width: 25px;
+  height: ${props => props.height};
+  width: ${props => props.width};
 `;

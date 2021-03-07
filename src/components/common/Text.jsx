@@ -40,6 +40,11 @@ const CSS = css`
       display: block;
     }
   `}
+
+  ${props => props.label && css`
+    padding: 3px 6px;
+    border-radius: 16px;
+  `}
 `;
 
 const Span = styled.span`${CSS}`;

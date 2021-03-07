@@ -15,6 +15,15 @@ export default class UsersApi {
     });
   }
 
+  getHouseMembers(userId, page, size) {
+    console.debug(`Get house members api function called with userId[${userId}], token[${this.token}]`);
+    return axiosInstance.get(`/users/${userId}/housemates?=${page ? `&page=${page}` : ''}${size ? `&size=${size}` : ''}`, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
+
   getUsers() {
     console.debug(`Get users api function called with token[${this.token}]`);
     return axiosInstance.get('/users', {
