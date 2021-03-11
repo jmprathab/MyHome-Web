@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { darken } from "polished";
 import styles from "../../styles";
+import Text from "../common/Text";
 
 const InputField = styled.input`
   width: 100%;
@@ -31,7 +32,7 @@ const InputField = styled.input`
   }
 
   ${props => props.error && css`
-    animation: shake 0.5s;
+    animation: shake .5s;
     border: 1px solid ${styles.colors.red};
   `} 
 
@@ -52,7 +53,7 @@ const InputField = styled.input`
       transform: translate(8px);
     }
     100% {
-      transform: translsate(0px);
+      transform: translate(0px);
     }
   }
 `;
@@ -68,35 +69,19 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-class Input extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onKeyDown = this.onKeyDown.bind(this);
-  }
-
-  onKeyDown(event) {
-    if (!this.props.enter) return;
-    if (event.keyCode === 13 /* Enter */) {
-      this.props.enter();
-    }
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        {this.props.label}
-        <Error>
-          {this.props.error}
-        </Error>
-        <InputField
-          {...this.props}
-          onChange={this.props.onChange}
-          onKeyDown={this.onKeyDown}
-        />
-      </Wrapper>
-    )
-  }
+function Input(props) {
+  return (
+    <Wrapper>
+      {props.label ? props.label : <Text margin="0" type="paragraph">{props.name}</Text>}
+      <Error>
+        {props.error}
+      </Error>
+      <InputField
+        {...props}
+        ref={props.inputRef}
+      />
+  </Wrapper>
+  );
 }
 
 export default Input;
