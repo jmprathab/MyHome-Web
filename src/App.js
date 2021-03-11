@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -70,20 +70,10 @@ const Transition = styled(CSSTransition)`
   }
 `;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+function App(props) {
+  const [overlay, setOverlay] = useState(false);
 
-    this.loadUserInfo();
-
-    this.onMenuToggle = this.onMenuToggle.bind(this);
-
-    this.state = {
-      overlay: false,
-    };
-  }
-
-  loadUserInfo() {
+  const loadUserInfo = () => {
     // Get user details from localStorage and save to react store
     try {
       var info = localStorage.getItem("userInfo");
@@ -91,7 +81,7 @@ class App extends React.Component {
         let userInfo = JSON.parse(info);
         console.log("Loaded UserId from storage : " + userInfo.userId);
         console.log("Loaded token from storage : " + userInfo.token);
-        this.props.setCurrentUser({
+        props.setCurrentUser({
           userId: userInfo.userId,
           token: userInfo.token,
         });
@@ -103,56 +93,51 @@ class App extends React.Component {
     }
   }
 
-  onMenuToggle() {
-    const overlay = this.state.overlay;
-    this.setState({
-      overlay: !overlay,
-    });
+  const onMenuToggle = () => {
+    setOverlay(!overlay);
   }
 
-  render() {
-    return (
-      <div>
-        <MainContainer>
-          <NavigationBar onMenuToggle={this.onMenuToggle} menuToggled={this.state.overlay} />
-          <PageContainer>
-            <Sidebar overlay={this.state.overlay} />
-            {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}
-            <Page>
-              <Route render={({ location }) => {
-                return <TransitionGroup>
-                  <Transition
-                    key={location.key}
-                    timeout={300}
-                    classNames="page-fade"
-                  >
-                    <div>
-                      <Switch location={location}>
-                        <Route exact path="/" component={this.props.currentUser ? HomepageLoggedIn : HomePage} />
+  loadUserInfo();
 
-                        <Route exact path="/signin" component={() => <Redirect to="/login" />} />
-                        <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
-                        <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+  return (
+    <MainContainer>
+      <NavigationBar onMenuToggle={onMenuToggle} menuToggled={overlay} />
+      <PageContainer>
+        <Sidebar overlay={overlay} />
+        {overlay && <Overlay onClick={onMenuToggle} />}
+        <Page>
+          <Route render={({ location }) => {
+            return <TransitionGroup>
+              <Transition
+                key={location.key}
+                timeout={300}
+                classNames="page-fade"
+              >
+                <div>
+                  <Switch location={location}>
+                    <Route exact path="/" component={props.currentUser ? HomepageLoggedIn : HomePage} />
 
-                        <Route exact path="/communities" component={CommunitiesPage} />
-                        <Route exact path="/community/new" component={CreateCommunityPage} />
-                        <Route exact path="/community/:uuid" component={CommunityPage} />
+                    <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                    <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                    <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
 
-                        <Route exact path="/user/:uuid" component={UserPage} />
-                        <Route exact path="/house/:uuid" component={HousePage} />
+                    <Route exact path="/communities" component={CommunitiesPage} />
+                    <Route exact path="/community/new" component={CreateCommunityPage} />
+                    <Route exact path="/community/:uuid" component={CommunityPage} />
 
-                        <Route path="*" component={NotFoundPage} />
-                      </Switch>
-                    </div>
-                  </Transition>
-                </TransitionGroup>
-              }} />
-            </Page>
-          </PageContainer>
-        </MainContainer>
-      </div>
-    );
-  }
+                    <Route exact path="/user/:uuid" component={UserPage} />
+                    <Route exact path="/house/:uuid" component={HousePage} />
+
+                    <Route path="*" component={NotFoundPage} />
+                  </Switch>
+                </div>
+              </Transition>
+            </TransitionGroup>
+          }} />
+        </Page>
+      </PageContainer>
+    </MainContainer>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({
