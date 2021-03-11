@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { faBell, faCalendar, faCogs, faComment, faHome, faMoneyBill, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -59,73 +59,67 @@ const Bar = styled.div`
   }
 `;
 
-class Sidebar extends Component {
-  getLinks() {
-    return [
-      {
-        link: '/',
-        icon: faHome,
-        text: 'Home',
-      },
-      {
-        link: '/notifications',
-        icon: faBell,
-        text: 'Notifications',
-      },
-      {
-        link: '/bookamenity',
-        icon: faCalendar,
-        text: 'Book Amenity',
-      },
-      {
-        link: '/payments',
-        icon: faMoneyBill,
-        text: 'Payments',
-      },
-      {
-        link: '/settings',
-        icon: faCogs,
-        text: 'Settings',
-      },
-      {
-        normal: true,
-        link: 'https://example.org',
-        icon: faQuestion,
-        text: 'Help',
-      },
-      {
-        normal: true,
-        icon: faComment,
-        link: 'https://github.com/',
-        text: 'Feedback',
-      },
-    ];
-  }
+const links = [
+  {
+    link: '/',
+    icon: faHome,
+    text: 'Home',
+  },
+  {
+    link: '/notifications',
+    icon: faBell,
+    text: 'Notifications',
+  },
+  {
+    link: '/bookamenity',
+    icon: faCalendar,
+    text: 'Book Amenity',
+  },
+  {
+    link: '/payments',
+    icon: faMoneyBill,
+    text: 'Payments',
+  },
+  {
+    link: '/settings',
+    icon: faCogs,
+    text: 'Settings',
+  },
+  {
+    normal: true,
+    link: 'https://example.org',
+    icon: faQuestion,
+    text: 'Help',
+  },
+  {
+    normal: true,
+    icon: faComment,
+    link: 'https://github.com/',
+    text: 'Feedback',
+  },
+];
 
-  render() {
-    return (
-      <>
-        <Bar overlay={this.props.overlay}>
-          <LinkList>
-            {this.getLinks().map((link, index) => {
-              let LinkComponent = Link;
-              if (link.normal) {
-                LinkComponent = NormalLink;
-              }
-              return <li key={index}>
-                <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
-                  <Icon icon={link.icon} />
-                  <Text fontWeight="500" color="currentColor">
-                    {link.text}
-                  </Text>
-                </LinkComponent>
-              </li>
-            })}
-          </LinkList>
-        </Bar>
-      </>
-    )
-  }
+function Sidebar(props) {
+  return (
+    <Bar overlay={props.overlay}>
+      <LinkList>
+        {links.map((link, index) => {
+          const LinkComponent = link.normal ? NormalLink : Link;
+
+          return (
+          <li key={index}>
+            <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
+              <Icon icon={link.icon} />
+              <Text fontWeight="500" color="currentColor">
+                {link.text}
+              </Text>
+            </LinkComponent>
+          </li>
+          )
+        })}
+      </LinkList>
+    </Bar>
+  );
 }
 
 export default Sidebar;
