@@ -13,8 +13,8 @@ import AccountsApi from "../../api/Accounts";
 function SignUp(props) {
   const signUp = (data) => {
     const responsePromise = new AccountsApi().createUser(data.Name, data.Email, data.Password);
-    responsePromise.
-      then(() => props.history.push('/login'))
+    responsePromise
+      .then(() => props.history.push('/login'))
       .catch(error => console.error(error));
   };
 
