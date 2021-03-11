@@ -8,14 +8,23 @@ import Text from "../../components/common/Text";
 import Link from "../../components/links/Link";
 import Input from "../../components/forms/Input";
 import Form from "../../components/forms/Form";
+import AccountsApi from "../../api/Accounts";
 
 function SignUp(props) {
+  const signUp = (data) => {
+    const responsePromise = new AccountsApi().createUser(data.Name, data.Email, data.Password);
+    responsePromise.
+      then(() => props.history.push('/login'))
+      .catch(error => console.error(error));
+  };
+
   return (
     <InputBox
       header="Sign Up"
       inputFields={
         <Form
           submitText="Sign Up"
+          onSubmit={signUp}
           fields={[
             <Input
               name="Name"
