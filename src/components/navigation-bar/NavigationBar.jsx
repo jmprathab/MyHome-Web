@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import styles from "../../styles";
@@ -36,7 +36,7 @@ const ItemList = styled.ul`
 const Item = styled.li`
   padding: 0 10px;
   cursor: pointer;
-  
+
   &:hover {
     background-color: ${darken(0.05, styles.colors.grey)};
   }
@@ -60,81 +60,70 @@ const MenuIcon = styled(FontAwesomeIcon)`
   path {
     transition: d .5s;
   }
-  
+
   @media screen and (max-width: 600px) {
     display: initial;
   }
 `;
 
-class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.goToSignUp = this.goToSignUp.bind(this);
-    this.goToLogin = this.goToLogin.bind(this);
-
-    this.doSignOut = this.doSignOut.bind(this);
+function NavigationBar(props) {
+  const goToSignUp = () => {
+    props.history.push('/signup');
   }
 
-  goToSignUp() {
-    this.props.history.push('/signup');
+  const goToLogin = () => {
+    props.history.push('/login');
   }
 
-  goToLogin() {
-    this.props.history.push('/login');
-  }
-
-  doSignOut() {
-    this.props.setCurrentUser(null);
+  const doSignOut = () => {
+    props.setCurrentUser(null);
     localStorage.removeItem('userInfo');
   }
 
-  render() {
-    return (
-      <Navbar>
-        <div>
-          <MenuIcon icon={this.props.menuToggled ? faTimes : faBars} onClick={this.props.onMenuToggle} />
-          <Text>MyHome logo</Text>
-        </div>
-        <div>
-          <span className="fa-layers fa-fw">
-            <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
-            <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
-          </span>
-          <span>
-            <Avatar src="https://http.cat/400" margin="0 10px" width="25px" height="25px" />
-            <Text
-              fontWeight="500"
-              dropdownMargin="0 0 0 -30px"
-              dropdown={
-                <ItemList>
-                  {this.props.currentUser ?
-                    <Item onClick={this.doSignOut}>
-                      <FontAwesomeIcon icon={faSignOutAlt} />
-                      <Text padding="0 0 0 5px">Logout</Text>
+  return (
+    <Navbar>
+      <div>
+        <MenuIcon icon={props.menuToggled ? faTimes : faBars} onClick={props.onMenuToggle} />
+        <Text>MyHome logo</Text>
+      </div>
+      <div>
+        <span className="fa-layers fa-fw">
+          <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
+          <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
+        </span>
+        <span>
+          <Avatar src="https://http.cat/400" margin="0 10px" width="25px" height="25px" />
+          <Text
+            fontWeight="500"
+            dropdownMargin="0 0 0 -30px"
+            dropdown={
+              <ItemList>
+                {props.currentUser ?
+                  <Item onClick={doSignOut}>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <Text padding="0 0 0 5px">Logout</Text>
+                  </Item>
+                :
+                  <>
+                    <Item onClick={goToSignUp}>
+                      <FontAwesomeIcon icon={faUserPlus} />
+                      <Text padding="0 0 0 5px">Sign Up</Text>
                     </Item>
-                  :
-                    <>
-                      <Item onClick={this.goToSignUp}>
-                        <FontAwesomeIcon icon={faUserPlus} />
-                        <Text padding="0 0 0 5px">Sign Up</Text>
-                      </Item>
-                      <Item onClick={this.goToLogin}>
-                        <FontAwesomeIcon icon={faSignInAlt} />
-                        <Text padding="0 0 0 5px">Login</Text>
-                      </Item>
-                    </>
-                  }
-                </ItemList>
-              }
-            >
-              {this.props.currentUser ? 'Tony Stark' : 'Guest'}
-            </Text>
-          </span>
-        </div>
-      </Navbar>
-    )
-  }
+                    <Item onClick={goToLogin}>
+                      <FontAwesomeIcon icon={faSignInAlt} />
+                      <Text padding="0 0 0 5px">Login</Text>
+                    </Item>
+                  </>
+                }
+              </ItemList>
+            }
+          >
+            {props.currentUser ? 'Tony Stark' : 'Guest'}
+          </Text>
+        </span>
+      </div>
+    </Navbar>
+  );
 }
 
 const mapStateToProps = (state) => ({
