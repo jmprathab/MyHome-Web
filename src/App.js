@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -70,89 +70,78 @@ const Transition = styled(CSSTransition)`
   }
 `;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.loadUserInfo();
-
-    this.onMenuToggle = this.onMenuToggle.bind(this);
-
-    this.state = {
-      overlay: false,
-    };
-  }
-
-  loadUserInfo() {
-    // Get user details from localStorage and save to react store
-    try {
-      var info = localStorage.getItem("userInfo");
-      if (info) {
-        let userInfo = JSON.parse(info);
-        console.log("Loaded UserId from storage : " + userInfo.userId);
-        console.log("Loaded token from storage : " + userInfo.token);
-        this.props.setCurrentUser({
-          userId: userInfo.userId,
-          token: userInfo.token,
-        });
-      } else {
-        console.log("user info not found");
-      }
-    } catch {
-      console.log("Cannot find info from localStorage");
+const loadUserInfo = (props) => {
+  // Get user details from localStorage and save to react store
+  try {
+    const info = localStorage.getItem("userInfo");
+    if (info) {
+      let userInfo = JSON.parse(info);
+      console.log("Loaded UserId from storage : " + userInfo.userId);
+      console.log("Loaded token from storage : " + userInfo.token);
+      props.setCurrentUser({
+        userId: userInfo.userId,
+        token: userInfo.token,
+      });
+    } else {
+      console.log("user info not found");
     }
+  } catch {
+    console.log("Cannot find info from localStorage");
+  }
+}
+
+function App(props) {
+  const [overlay, setOverlay] = useState(false);
+
+  useEffect(() => {
+    loadUserInfo(props);
+  });
+
+  const onMenuToggle = () => {
+    setOverlay(!overlay);
   }
 
-  onMenuToggle() {
-    const overlay = this.state.overlay;
-    this.setState({
-      overlay: !overlay,
-    });
-  }
+  return (
+    <MainContainer>
+      <NavigationBar onMenuToggle={onMenuToggle} menuToggled={overlay} />
+      <PageContainer>
+        <Sidebar overlay={overlay} />
+        {overlay && <Overlay onClick={onMenuToggle} />}
+        <Page>
+          <Route render={({ location }) => {
+            return (
+              <TransitionGroup>
+                <Transition
+                  key={location.key}
+                  timeout={300}
+                  classNames="page-fade"
+                >
+                  <div>
+                    <Switch location={location}>
+                      <Route exact path="/" component={props.currentUser ? HomepageLoggedIn : HomePage} />
 
-  render() {
-    return (
-      <div>
-        <MainContainer>
-          <NavigationBar onMenuToggle={this.onMenuToggle} menuToggled={this.state.overlay} />
-          <PageContainer>
-            <Sidebar overlay={this.state.overlay} />
-            {this.state.overlay && <Overlay onClick={this.onMenuToggle} />}
-            <Page>
-              <Route render={({ location }) => {
-                return <TransitionGroup>
-                  <Transition
-                    key={location.key}
-                    timeout={300}
-                    classNames="page-fade"
-                  >
-                    <div>
-                      <Switch location={location}>
-                        <Route exact path="/" component={this.props.currentUser ? HomepageLoggedIn : HomePage} />
+                      <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                      <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                      <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
 
-                        <Route exact path="/signin" component={() => <Redirect to="/login" />} />
-                        <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
-                        <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+                      <Route exact path="/communities" component={CommunitiesPage} />
+                      <Route exact path="/community/new" component={CreateCommunityPage} />
+                      <Route exact path="/community/:uuid" component={CommunityPage} />
 
-                        <Route exact path="/communities" component={CommunitiesPage} />
-                        <Route exact path="/community/new" component={CreateCommunityPage} />
-                        <Route exact path="/community/:uuid" component={CommunityPage} />
+                      <Route exact path="/user/:uuid" component={UserPage} />
+                      <Route exact path="/house/:uuid" component={HousePage} />
 
-                        <Route exact path="/user/:uuid" component={UserPage} />
-                        <Route exact path="/house/:uuid" component={HousePage} />
-
-                        <Route path="*" component={NotFoundPage} />
-                      </Switch>
-                    </div>
-                  </Transition>
-                </TransitionGroup>
-              }} />
-            </Page>
-          </PageContainer>
-        </MainContainer>
-      </div>
-    );
-  }
+                      <Route path="*" component={NotFoundPage} />
+                    </Switch>
+                  </div>
+                </Transition>
+              </TransitionGroup>
+            )
+          }} />
+        </Page>
+      </PageContainer>
+    </MainContainer>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({
