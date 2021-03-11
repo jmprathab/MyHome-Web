@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import background from "../../assets/sign-in-and-sign-up/background.jpg";
@@ -37,26 +37,22 @@ const Underline = styled.span`
   padding-bottom: 10px;
 `;
 
-class SignInAndSignUpPage extends Component {
-  render() {
-    return (<>
-      <PageFlexMod>
-        <TextBox>
-          <Text fontSize="52px" type="header" color={styles.colors.white}>
-            <Underline>My</Underline>Home
-          </Text>
-          <Text padding="20px 0 0 0" fontSize="32px" color={styles.colors.white}>
-            Manage your community with ease.
-          </Text>
-        </TextBox>
-        <InputBox>
-          {this.props.inputBox} 
-        </InputBox>
-      </PageFlexMod>
-      {new Array(100).map(n => <p>{n}</p>)}
-      </>
-    )
-  }
+function SignInAndSignUp(props) {
+  return (
+    <PageFlexMod>
+      <TextBox>
+        <Text fontSize="52px" type="header" color={styles.colors.white}>
+          <Underline>My</Underline>Home
+        </Text>
+        <Text padding="20px 0 0 0" fontSize="32px" color={styles.colors.white}>
+          Manage your community with ease.
+        </Text>
+      </TextBox>
+      <InputBox>
+        {props.inputBox} 
+      </InputBox>
+    </PageFlexMod>
+  );
 }
 
-export default SignInAndSignUpPage;
+export default SignInAndSignUp;
