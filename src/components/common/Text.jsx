@@ -1,11 +1,11 @@
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import styles from "../../styles";
 
 const CSS = css`
-  ${props => props.fontSize && css` 
+  ${props => props.fontSize && css`
     font-size: ${props.fontSize};
   `}
   ${props => props.textAlign && css`
@@ -63,51 +63,39 @@ const DropdownContent = styled.div`
   ${props => props.dropdownMargin && css`
     margin: ${props.dropdownMargin};
   `}
-`;
+  `;
 
-class Text extends Component {
-  constructor(props) {
-    super(props);
+function Text(props) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    this.toogleDropdown = this.toogleDropdown.bind(this);
-
-    this.state = {
-      dropdownOpen: false,
-    };
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   }
 
-  toogleDropdown() {
-    const currentState = this.state.dropdownOpen;
-    this.setState({
-      dropdownOpen: !currentState,
-    });
-  }
-
-  render() {
-    let Selected;
-    switch (this.props.type) {
+  const getSelected = () => {
+    switch (props.type) {
       case 'paragraph':
-        Selected = Paragraph;
-        break;
+        return Paragraph;
       case 'header':
-        Selected = Header;
-        break;
+        return Header;
       default:
-        Selected = Span;
-        break;
+        return Span;
     }
-    return (
-      <Selected {...this.props} data-dropdownopen={JSON.stringify(this.state.dropdownOpen)}>
-        {this.props.children}
-        {this.props.dropdown && <>
-          <DropdownIcon icon={this.state.dropdownOpen ? faChevronDown : faChevronRight} size="sm" onClick={this.toogleDropdown} />
-          <DropdownContent {...this.props} className="dropdownContent">
-            {this.props.dropdown}
-          </DropdownContent>
-        </>}
-      </Selected>
-    )
   }
+
+  const Selected = getSelected();
+
+  return (
+    <Selected {...props} data-dropdownopen={JSON.stringify(dropdownOpen)}>
+      {props.children}
+      {props.dropdown && <>
+        <DropdownIcon icon={dropdownOpen ? faChevronDown : faChevronRight} size="sm" onClick={toggleDropdown} />
+        <DropdownContent {...props} className="dropdownContent">
+          {props.dropdown}
+        </DropdownContent>
+      </>}
+    </Selected>
+  )
 }
 
 export default Text;
