@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import Text from "../../components/common/Text";
-import Button from "../../components/common/Button";
 import styles from "../../styles";
 
 const Box = styled.div`
@@ -25,38 +24,30 @@ const SurroundedText = styled(Text)`
   }
 `;
 
-class InputBox extends Component {
-  render() {
-    return (
-      <Box>
-        <Text
-          type="header"
-          textAlign="center"
-        >
-          {this.props.header}
-        </Text>
-        {this.props.inputFields}
-        <Button
-          color={styles.colors.purple}
-          onClick={this.props.onButtonClick}
-        >
-          {this.props.buttonText}
-        </Button>
-        <Text
-          padding="20px 0 0 0"
-          type="paragraph"
-          fontSize="10px"
-          textAlign="center"
-        >
-          By continuing you agree to accept our <br /> Privacy Policy &amp; Terms of Service
-        </Text>
-        <SurroundedText type="paragraph" textAlign="center" uppercase>
-          Or
-        </SurroundedText>
-        {this.props.footer}
-      </Box>
-    )
-  }
+function InputBox(props) {
+  return (
+    <Box>
+      <Text
+        type="header"
+        textAlign="center"
+      >
+        {props.header}
+      </Text>
+      {props.inputFields}
+      <Text
+        padding="20px 0 0 0"
+        type="paragraph"
+        fontSize="10px"
+        textAlign="center"
+      >
+        By continuing you agree to accept our <br /> Privacy Policy &amp; Terms of Service
+      </Text>
+      <SurroundedText type="paragraph" textAlign="center" uppercase>
+        Or
+      </SurroundedText>
+      {props.footer}
+    </Box>
+  );
 }
 
 export default InputBox;
