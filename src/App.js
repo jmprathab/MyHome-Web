@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -70,34 +70,36 @@ const Transition = styled(CSSTransition)`
   }
 `;
 
+const loadUserInfo = (props) => {
+  // Get user details from localStorage and save to react store
+  try {
+    const info = localStorage.getItem("userInfo");
+    if (info) {
+      let userInfo = JSON.parse(info);
+      console.log("Loaded UserId from storage : " + userInfo.userId);
+      console.log("Loaded token from storage : " + userInfo.token);
+      props.setCurrentUser({
+        userId: userInfo.userId,
+        token: userInfo.token,
+      });
+    } else {
+      console.log("user info not found");
+    }
+  } catch {
+    console.log("Cannot find info from localStorage");
+  }
+}
+
 function App(props) {
   const [overlay, setOverlay] = useState(false);
 
-  const loadUserInfo = () => {
-    // Get user details from localStorage and save to react store
-    try {
-      var info = localStorage.getItem("userInfo");
-      if (info) {
-        let userInfo = JSON.parse(info);
-        console.log("Loaded UserId from storage : " + userInfo.userId);
-        console.log("Loaded token from storage : " + userInfo.token);
-        props.setCurrentUser({
-          userId: userInfo.userId,
-          token: userInfo.token,
-        });
-      } else {
-        console.log("user info not found");
-      }
-    } catch {
-      console.log("Cannot find info from localStorage");
-    }
-  }
+  useEffect(() => {
+    loadUserInfo(props);
+  });
 
   const onMenuToggle = () => {
     setOverlay(!overlay);
   }
-
-  loadUserInfo();
 
   return (
     <MainContainer>
@@ -107,32 +109,34 @@ function App(props) {
         {overlay && <Overlay onClick={onMenuToggle} />}
         <Page>
           <Route render={({ location }) => {
-            return <TransitionGroup>
-              <Transition
-                key={location.key}
-                timeout={300}
-                classNames="page-fade"
-              >
-                <div>
-                  <Switch location={location}>
-                    <Route exact path="/" component={props.currentUser ? HomepageLoggedIn : HomePage} />
+            return (
+              <TransitionGroup>
+                <Transition
+                  key={location.key}
+                  timeout={300}
+                  classNames="page-fade"
+                >
+                  <div>
+                    <Switch location={location}>
+                      <Route exact path="/" component={props.currentUser ? HomepageLoggedIn : HomePage} />
 
-                    <Route exact path="/signin" component={() => <Redirect to="/login" />} />
-                    <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
-                    <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
+                      <Route exact path="/signin" component={() => <Redirect to="/login" />} />
+                      <Route exact path="/login" component={() => <SignInAndSignUpPage inputBox={<SignIn />} />} />
+                      <Route exact path="/signup" component={() => <SignInAndSignUpPage inputBox={<SignUp />} />} />
 
-                    <Route exact path="/communities" component={CommunitiesPage} />
-                    <Route exact path="/community/new" component={CreateCommunityPage} />
-                    <Route exact path="/community/:uuid" component={CommunityPage} />
+                      <Route exact path="/communities" component={CommunitiesPage} />
+                      <Route exact path="/community/new" component={CreateCommunityPage} />
+                      <Route exact path="/community/:uuid" component={CommunityPage} />
 
-                    <Route exact path="/user/:uuid" component={UserPage} />
-                    <Route exact path="/house/:uuid" component={HousePage} />
+                      <Route exact path="/user/:uuid" component={UserPage} />
+                      <Route exact path="/house/:uuid" component={HousePage} />
 
-                    <Route path="*" component={NotFoundPage} />
-                  </Switch>
-                </div>
-              </Transition>
-            </TransitionGroup>
+                      <Route path="*" component={NotFoundPage} />
+                    </Switch>
+                  </div>
+                </Transition>
+              </TransitionGroup>
+            )
           }} />
         </Page>
       </PageContainer>

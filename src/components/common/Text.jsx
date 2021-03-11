@@ -88,12 +88,14 @@ function Text(props) {
   return (
     <Selected {...props} data-dropdownopen={JSON.stringify(dropdownOpen)}>
       {props.children}
-      {props.dropdown && <>
+      {props.dropdown &&
+      <>
         <DropdownIcon icon={dropdownOpen ? faChevronDown : faChevronRight} size="sm" onClick={toggleDropdown} />
         <DropdownContent {...props} className="dropdownContent">
           {props.dropdown}
         </DropdownContent>
-      </>}
+      </>
+      }
     </Selected>
   )
 }

@@ -107,14 +107,14 @@ function Sidebar(props) {
           const LinkComponent = link.normal ? NormalLink : Link;
 
           return (
-          <li key={index}>
-            <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
-              <Icon icon={link.icon} />
-              <Text fontWeight="500" color="currentColor">
-                {link.text}
-              </Text>
-            </LinkComponent>
-          </li>
+            <li key={index}>
+              <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
+                <Icon icon={link.icon} />
+                <Text fontWeight="500" color="currentColor">
+                  {link.text}
+                </Text>
+              </LinkComponent>
+            </li>
           )
         })}
       </LinkList>
