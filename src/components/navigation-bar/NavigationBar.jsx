@@ -10,7 +10,7 @@ import Text from "../common/Text";
 import Avatar from "../common/Avatar";
 import { faBars, faSignInAlt, faSignOutAlt, faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { darken } from "polished";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const Navbar = styled.div`
   z-index: 2;
@@ -97,10 +97,12 @@ class NavigationBar extends Component {
           <Text>MyHome logo</Text>
         </div>
         <div>
+          <Link to="/notifications">
           <span className="fa-layers fa-fw">
-            <FontAwesomeIcon icon={faBell} color={styles.colors.grey} size="lg" />
+            <FontAwesomeIcon icon={faBell} color={styles.colors.black} size="lg" />
             <Text className="fa-layers-counter" color={styles.colors.white} fontSize="2em" backgroundColor={styles.colors.red}>2</Text>
           </span>
+          </Link>
           <span>
             <Avatar src="https://http.cat/400" margin="0 10px" width="25px" height="25px" />
             <Text
