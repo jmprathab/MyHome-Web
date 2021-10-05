@@ -22,7 +22,7 @@ const Navbar = styled.div`
   padding: 0 20px;
   top: 0;
   position: sticky;
-  background-color: ${styles.variables.white};
+  background-color: ${styles.variables.blue};
 `;
 
 const ItemList = styled.ul`
@@ -94,7 +94,7 @@ class NavigationBar extends Component {
       <Navbar>
         <div>
           <MenuIcon icon={this.props.menuToggled ? faTimes : faBars} onClick={this.props.onMenuToggle} />
-          <Text>MyHome logo</Text>
+          <Text color={styles.colors.white}>MyHome logo</Text>
         </div>
         <div>
           <span className="fa-layers fa-fw">
@@ -106,6 +106,7 @@ class NavigationBar extends Component {
             <Text
               fontWeight="500"
               dropdownMargin="0 0 0 -30px"
+              color={styles.colors.white}
               dropdown={
                 <ItemList>
                   {this.props.currentUser ?
@@ -128,7 +129,7 @@ class NavigationBar extends Component {
                 </ItemList>
               }
             >
-              {this.props.currentUser ? 'Tony Stark' : 'Guest'}
+              {this.props.currentUser  ? 'Tony Stark' : 'Guest'}
             </Text>
           </span>
         </div>
