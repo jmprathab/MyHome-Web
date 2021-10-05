@@ -3,4 +3,5 @@ export default {
   viewHeight: 'calc(100vh - 50px)',
   white: '#FFFFFF',
   black: '#000000',
+  blue: '#0058FF'
 };
