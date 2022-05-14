@@ -1,12 +1,19 @@
-
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { faBell, faCalendar, faCogs, faComment, faHome, faMoneyBill, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled, { css } from "styled-components";
-import { lighten } from "polished";
-import styles from "../../styles";
-import Text from "../common/Text";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import {
+  faBell,
+  faCalendar,
+  faCogs,
+  faComment,
+  faHome,
+  faMoneyBill,
+  faQuestion,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
+import styles from '../../styles';
+import Text from '../common/Text';
 
 const CSS = css`
   padding: 10px 10px 10px 20px;
@@ -23,12 +30,16 @@ const CSS = css`
   }
 
   &:not(.active) {
-    margin-left: 3px
+    margin-left: 3px;
   }
 `;
 
-const Link = styled(NavLink)`${CSS}`;
-const NormalLink = styled.a`${CSS}`;
+const Link = styled(NavLink)`
+  ${CSS}
+`;
+const NormalLink = styled.a`
+  ${CSS}
+`;
 
 const Icon = styled(FontAwesomeIcon)`
   margin-right: 10px;
@@ -53,79 +64,83 @@ const Bar = styled.div`
     position: absolute;
     display: none;
 
-    ${props => props.overlay && css`
-      display: initial;
-    `}
+    ${(props) =>
+      props.overlay &&
+      css`
+        display: initial;
+      `}
   }
 `;
 
-class Sidebar extends Component {
-  getLinks() {
-    return [
-      {
-        link: '/',
-        icon: faHome,
-        text: 'Home',
-      },
-      {
-        link: '/notifications',
-        icon: faBell,
-        text: 'Notifications',
-      },
-      {
-        link: '/bookamenity',
-        icon: faCalendar,
-        text: 'Book Amenity',
-      },
-      {
-        link: '/payments',
-        icon: faMoneyBill,
-        text: 'Payments',
-      },
-      {
-        link: '/settings',
-        icon: faCogs,
-        text: 'Settings',
-      },
-      {
-        normal: true,
-        link: 'https://example.org',
-        icon: faQuestion,
-        text: 'Help',
-      },
-      {
-        normal: true,
-        icon: faComment,
-        link: 'https://github.com/',
-        text: 'Feedback',
-      },
-    ];
-  }
+const Sidebar = (props) => {
+  const { overlay } = props;
 
-  render() {
-    return (
-      <>
-        <Bar overlay={this.props.overlay}>
-          <LinkList>
-            {this.getLinks().map((link, index) => {
-              let LinkComponent = Link;
-              if (link.normal) {
-                LinkComponent = NormalLink;
-              }
-              return <li key={index}>
-                <LinkComponent exact activeClassName="active" to={link.link} href={link.link}>
+  const links = [
+    {
+      link: '/',
+      icon: faHome,
+      text: 'Home',
+    },
+    {
+      link: '/notifications',
+      icon: faBell,
+      text: 'Notifications',
+    },
+    {
+      link: '/bookamenity',
+      icon: faCalendar,
+      text: 'Book Amenity',
+    },
+    {
+      link: '/payments',
+      icon: faMoneyBill,
+      text: 'Payments',
+    },
+    {
+      link: '/settings',
+      icon: faCogs,
+      text: 'Settings',
+    },
+    {
+      normal: true,
+      link: 'https://example.org',
+      icon: faQuestion,
+      text: 'Help',
+    },
+    {
+      normal: true,
+      icon: faComment,
+      link: 'https://github.com/',
+      text: 'Feedback',
+    },
+  ];
+
+  return (
+    <>
+      <Bar overlay={overlay}>
+        <LinkList>
+          {links.map((link, index) => {
+            const LinkComponent = link.normal ? NormalLink : Link;
+            return (
+              <li key={index}>
+                <LinkComponent
+                  exact
+                  activeClassName="active"
+                  to={link.link}
+                  href={link.link}
+                >
                   <Icon icon={link.icon} />
                   <Text fontWeight="500" color="currentColor">
                     {link.text}
                   </Text>
                 </LinkComponent>
               </li>
-            })}
-          </LinkList>
-        </Bar>
-      </>
-    )
-  }
-}
+            );
+          })}
+        </LinkList>
+      </Bar>
+    </>
+  );
+};
 
 export default Sidebar;
