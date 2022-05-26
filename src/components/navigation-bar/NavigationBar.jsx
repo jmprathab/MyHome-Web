@@ -78,7 +78,6 @@ const NavigationBar = (props) => {
 
   const { setCurrentUser, currentUser, menuToggled, onMenuToggle } = props;
 
-  // TODO: check where these are used and simplify to pure function
   const goToSignUp = () => {
     history.push('/signup');
   };
@@ -86,7 +85,6 @@ const NavigationBar = (props) => {
     history.push('/login');
   };
 
-  // TODO: Check if this could be done in utils instead
   const doSignOut = () => {
     setCurrentUser(null);
     localStorage.removeItem('userInfo');
