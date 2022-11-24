@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+
+  myhomeweb:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    stdin_open: true   
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: ./
+        target: /src/app
+    networks:
+      - myhomewebnetwork
+
+  
+networks:
+  myhomewebnetwork:
+    driver: bridge
+  
