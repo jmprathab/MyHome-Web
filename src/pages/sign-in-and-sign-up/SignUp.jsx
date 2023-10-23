@@ -51,11 +51,11 @@ class SignUp extends Component {
         errors['confirmPassword'] = 'Password don\'t match';
       }
       if (id === 'password' && !(value.length > 6)) {
-        errors[id] = 'Password needs to have between x and y characters';
+        errors[id] = ' Password must be at least 6 character long ';
       }
   
       if (id === 'email' && !value.match(/^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/)) {
-        errors[id] = 'Email adress is not valid';
+        errors[id] = 'Email address is not valid';
       }
     }
     return errors;
