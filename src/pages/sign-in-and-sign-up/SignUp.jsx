@@ -55,7 +55,7 @@ class SignUp extends Component {
       }
   
       if (id === 'email' && !value.match(/^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/)) {
-        errors[id] = 'Email adress is not valid';
+        errors[id] = 'Email Adress is not valid';
       }
     }
     return errors;
